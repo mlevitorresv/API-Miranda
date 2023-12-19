@@ -1,15 +1,17 @@
 import express, { Request, Response } from 'express'
-import contacts from '../data/comment.json'
+import { fetchAllContacts, fetchContactById } from '../services/contact';
 
 export const contactRouter = express.Router();
 
 contactRouter.get('/', (req: Request, res: Response) => {
-    res.send(contacts)
+    const allContacts = fetchAllContacts();
+    res.send(allContacts)
 })
 
 contactRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    res.send(contacts.find((contact)=> contact.id === parseInt(id)))
+    const contact = fetchContactById(parseInt(id))
+    res.send(contact)
 })
 
 contactRouter.post('/new', (req: Request, res: Response)=>{

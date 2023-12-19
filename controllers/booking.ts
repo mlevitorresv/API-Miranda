@@ -1,15 +1,17 @@
 import express, { Request, Response } from 'express'
-import bookings from '../data/bookings.json'
+import { fetchAllBookings, fetchBookingById } from '../services/booking';
 
 export const bookingRouter = express.Router();
 
 bookingRouter.get('/', (req: Request, res: Response) => {
-    res.send(bookings)
+    const allBookings = fetchAllBookings();
+    res.send(allBookings)
 })
 
 bookingRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    res.send(bookings.find((booking)=> booking.id === parseInt(id)))
+    const booking  = fetchBookingById(parseInt(id));
+    res.send(booking)
 })
 
 bookingRouter.post('/new', (req: Request, res: Response)=>{

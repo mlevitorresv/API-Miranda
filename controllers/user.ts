@@ -1,15 +1,18 @@
 import express, { Request, Response } from 'express'
-import users from '../data/users.json'
+import { fetchAllUsers, fetchUserById } from '../services/user';
+
 
 export const userRouter = express.Router();
 
 userRouter.get('/', (req: Request, res: Response) => {
-    res.send(users)
+    const allUsers = fetchAllUsers();
+    res.send(allUsers)
 })
 
 userRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    res.send(users.find((user)=> user.id === parseInt(id)))
+    const user = fetchUserById(parseInt(id));
+    res.send(user)
 })
 
 userRouter.post('/new', (req: Request, res: Response)=>{

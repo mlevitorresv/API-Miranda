@@ -1,15 +1,17 @@
 import express, { Request, Response } from 'express'
-import rooms from '../data/rooms.json'
+import { fetchAllRooms, fetchRoomById } from '../services/room';
 
 export const roomRouter = express.Router();
 
 roomRouter.get('/', (req: Request, res: Response) => {
-    res.send(rooms)
+    const allRooms = fetchAllRooms();
+    res.send(allRooms)
 })
 
 roomRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    res.send(rooms.find((room)=> room.id === parseInt(id)))
+    const room = fetchRoomById(parseInt(id));
+    res.send(room)
 })
 
 roomRouter.post('/new', (req: Request, res: Response)=>{
