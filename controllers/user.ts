@@ -1,17 +1,18 @@
 import express, { Request, Response } from 'express'
 import { fetchAllUsers, fetchUserById } from '../services/user';
+import { UserInterface } from '../models/user';
 
 
 export const userRouter = express.Router();
 
 userRouter.get('/', (req: Request, res: Response) => {
-    const allUsers = fetchAllUsers();
+    const allUsers: UserInterface[] = fetchAllUsers();
     res.send(allUsers)
 })
 
 userRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    const user = fetchUserById(parseInt(id));
+    const user: UserInterface | undefined = fetchUserById(parseInt(id));
     res.send(user)
 })
 

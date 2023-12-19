@@ -1,16 +1,17 @@
 import express, { Request, Response } from 'express'
 import { fetchAllContacts, fetchContactById } from '../services/contact';
+import { ContactInterface } from '../models/contact';
 
 export const contactRouter = express.Router();
 
 contactRouter.get('/', (req: Request, res: Response) => {
-    const allContacts = fetchAllContacts();
+    const allContacts: ContactInterface[] = fetchAllContacts();
     res.send(allContacts)
 })
 
 contactRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    const contact = fetchContactById(parseInt(id))
+    const contact: ContactInterface  | undefined = fetchContactById(parseInt(id))
     res.send(contact)
 })
 

@@ -1,16 +1,17 @@
 import express, { Request, Response } from 'express'
 import { fetchAllBookings, fetchBookingById } from '../services/booking';
+import { BookingInterface } from '../models/booking';
 
 export const bookingRouter = express.Router();
 
 bookingRouter.get('/', (req: Request, res: Response) => {
-    const allBookings = fetchAllBookings();
+    const allBookings: BookingInterface[] = fetchAllBookings();
     res.send(allBookings)
 })
 
 bookingRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    const booking  = fetchBookingById(parseInt(id));
+    const booking: BookingInterface | undefined  = fetchBookingById(parseInt(id));
     res.send(booking)
 })
 
