@@ -16,15 +16,11 @@ app.use('/public', showEndpoints(app))
 app.use(authMiddleware);
 
 app.use('/rooms', roomRouter)
-app.use('/rooms/:id', roomRouter)
 
 app.use('/users', userRouter)
-app.use('/users/:id', userRouter)
 
 app.use('/contacts', contactRouter)
-app.use('/contacts/:id', contactRouter)
 
 app.use('/bookings', bookingRouter)
-app.use('/bookings/:id', bookingRouter)
  
 export default app;
