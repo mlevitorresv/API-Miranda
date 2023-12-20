@@ -10,20 +10,21 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/rooms', authMiddleware, roomRouter)
-app.use('/rooms/:id', authMiddleware, roomRouter)
-
-app.use('/users', authMiddleware, userRouter)
-app.use('/users/:id', authMiddleware, userRouter)
-
-app.use('/contacts', authMiddleware, contactRouter)
-app.use('/contacts/:id', authMiddleware, contactRouter)
-
-app.use('/bookings', authMiddleware, bookingRouter)
-app.use('/bookings/:id', authMiddleware, bookingRouter)
-
 app.use('/login', loginRouter)
-
 app.use('/public', showEndpoints(app))
+
+app.use(authMiddleware);
+
+app.use('/rooms', roomRouter)
+app.use('/rooms/:id', roomRouter)
+
+app.use('/users', userRouter)
+app.use('/users/:id', userRouter)
+
+app.use('/contacts', contactRouter)
+app.use('/contacts/:id', contactRouter)
+
+app.use('/bookings', bookingRouter)
+app.use('/bookings/:id', bookingRouter)
  
 export default app;
