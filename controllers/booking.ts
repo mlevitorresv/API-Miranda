@@ -6,27 +6,27 @@ export const bookingRouter = express.Router();
 
 bookingRouter.get('/', (req: Request, res: Response) => {
     const allBookings: BookingInterface[] = fetchAllBookings();
-    res.send(allBookings)
+    res.json(allBookings)
 })
 
 bookingRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
     const booking: BookingInterface | undefined  = fetchBookingById(parseInt(id));
-    res.send(booking)
+    res.json(booking)
 })
 
 bookingRouter.post('/new', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 bookingRouter.put('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 bookingRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 bookingRouter.delete('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })

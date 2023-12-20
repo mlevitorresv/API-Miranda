@@ -7,27 +7,27 @@ export const userRouter = express.Router();
 
 userRouter.get('/', (req: Request, res: Response) => {
     const allUsers: UserInterface[] = fetchAllUsers();
-    res.send(allUsers)
+    res.json(allUsers)
 })
 
 userRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
     const user: UserInterface | undefined = fetchUserById(parseInt(id));
-    res.send(user)
+    res.json(user)
 })
 
 userRouter.post('/new', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 userRouter.put('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 userRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 userRouter.delete('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })

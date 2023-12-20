@@ -6,27 +6,27 @@ export const roomRouter = express.Router();
 
 roomRouter.get('/', (req: Request, res: Response) => {
     const allRooms: RoomInterface[] = fetchAllRooms();
-    res.send(allRooms)
+    res.json(allRooms)
 })
 
 roomRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
     const room: RoomInterface | undefined = fetchRoomById(parseInt(id));
-    res.send(room)
+    res.json(room)
 })
 
 roomRouter.post('/new', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 roomRouter.put('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 roomRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
 
 roomRouter.delete('/:id', (req: Request, res: Response)=>{
-    res.send({success: true})
+    res.json({success: true})
 })
