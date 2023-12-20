@@ -5,6 +5,7 @@ import { contactRouter } from './controllers/contact'
 import { bookingRouter } from './controllers/booking'
 import { authMiddleware } from './middleware/auth'
 import { showEndpoints } from './public'
+import { loginRouter } from './controllers/login'
 const app = express()
 
 app.use('/rooms', authMiddleware, roomRouter)
@@ -19,6 +20,8 @@ app.use('/contacts/:id', authMiddleware, contactRouter)
 app.use('/bookings', authMiddleware, bookingRouter)
 app.use('/bookings/:id', authMiddleware, bookingRouter)
 
-app.use('/public', showEndpoints(app))
+app.use('/login', loginRouter)
 
+app.use('/public', showEndpoints(app))
+ 
 export default app;

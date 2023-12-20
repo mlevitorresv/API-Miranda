@@ -1,26 +1,38 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-interface AuthenticatedRequest extends Request { 
+dotenv.config();
+interface AuthenticatedRequest extends Request {
     user?: any;
-  }
+}
 
-export const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    const token = req.header('Authorization')
+const secretKey = process.env.SECRET_KEY;
 
-    if(!token){
-        return res.status(401).send({error: 'Unauthorized: Missing token'})
+
+export const generateToken = (email: string, password: string) => {
+    if(email === 'test@test.com' && password === 'test1234'){
+        if(secretKey) return jwt.sign({email}, secretKey, {expiresIn: '24h'});
     }
 
-    if(process.env.SECRET_KEY){
-        jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-            if(err){
-                return res.status(403).send({error: 'Forbidden: Invalid token'})
-            }
-    
-            req.user = user;
-    
-            next();
-        })
+    return null;
+}
+
+export const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    const auth = req.headers["authorization"]
+    const token = auth?.split(' ')[1];
+
+    if(!token){
+        return res.status(401).send({error: 'Unauthorized: Missing Token'});
+    }
+    else{
+        if(secretKey){
+            jwt.verify(token, secretKey, (err: any, user: any) => {
+                if(err) return res.status(403).send({error: 'Invalid token'});
+                req.user = user;
+                next();
+            })
+        }
+        
     }
 }
