@@ -12,15 +12,21 @@ const secretKey = process.env.SECRET_KEY;
 
 export const generateToken = (email: string, password: string) => {
     if(email === 'test@test.com' && password === 'test1234'){
-        if(secretKey) return jwt.sign({email}, secretKey, {expiresIn: '24h'});
+        if(secretKey){
+            return jwt.sign({email}, secretKey, {expiresIn: '24h'});
+        }
+        else{
+            throw new Error('Secret Key not defined.')
+        }
     }
-
     return null;
 }
 
 export const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    const auth = req.headers["authorization"]
-    const token = auth?.split(' ')[1];
+    const authHeader = req.headers["authorization"]
+    if(!authHeader)
+        return res.status(401).json({error: true, message: 'no auth header'})
+    const token = authHeader.split('Bearer ')[1];
 
     if(!token){
         return res.status(401).send({error: 'Unauthorized: Missing Token'});

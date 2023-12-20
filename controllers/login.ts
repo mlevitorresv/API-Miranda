@@ -13,6 +13,4 @@ loginRouter.post('/', async (req: Request, res: Response) => {
     else{
         res.status(401).send({error: "Unauthorized: Invalid credentials"})
     }
-
-
 })

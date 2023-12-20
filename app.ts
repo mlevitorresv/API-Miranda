@@ -8,6 +8,8 @@ import { showEndpoints } from './public'
 import { loginRouter } from './controllers/login'
 const app = express()
 
+app.use(express.json())
+
 app.use('/rooms', authMiddleware, roomRouter)
 app.use('/rooms/:id', authMiddleware, roomRouter)
 
