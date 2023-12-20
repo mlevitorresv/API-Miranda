@@ -16,7 +16,7 @@ contactRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 contactRouter.post('/new', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json({success: true, comment: req.body})
 })
 
 contactRouter.put('/:id', (req: Request, res: Response)=>{
@@ -24,7 +24,7 @@ contactRouter.put('/:id', (req: Request, res: Response)=>{
 })
 
 contactRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json({success: true, comment: req.body})
 })
 
 contactRouter.delete('/:id', (req: Request, res: Response)=>{

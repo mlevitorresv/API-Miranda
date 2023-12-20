@@ -16,7 +16,7 @@ roomRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 roomRouter.post('/new', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json({success: true, room: req.body})
 })
 
 roomRouter.put('/:id', (req: Request, res: Response)=>{
@@ -24,7 +24,7 @@ roomRouter.put('/:id', (req: Request, res: Response)=>{
 })
 
 roomRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json({success: true,  room: req.body})
 })
 
 roomRouter.delete('/:id', (req: Request, res: Response)=>{

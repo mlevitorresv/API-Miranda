@@ -16,7 +16,7 @@ bookingRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 bookingRouter.post('/new', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json({success: true, booking: req.body})
 })
 
 bookingRouter.put('/:id', (req: Request, res: Response)=>{
@@ -24,7 +24,7 @@ bookingRouter.put('/:id', (req: Request, res: Response)=>{
 })
 
 bookingRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json({success: true, booking: req.body})
 })
 
 bookingRouter.delete('/:id', (req: Request, res: Response)=>{

@@ -17,7 +17,7 @@ userRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 userRouter.post('/new', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json({success: true, user: req.body})
 })
 
 userRouter.put('/:id', (req: Request, res: Response)=>{
@@ -25,7 +25,7 @@ userRouter.put('/:id', (req: Request, res: Response)=>{
 })
 
 userRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json({success: true, user: req.body})
 })
 
 userRouter.delete('/:id', (req: Request, res: Response)=>{
