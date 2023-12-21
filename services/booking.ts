@@ -1,5 +1,7 @@
-import bookings from '../data/bookings.json'
 import { BookingInterface } from '../models/booking';
+import fs from 'fs'
+
+const bookings: BookingInterface[] = JSON.parse(fs.readFileSync('./data/bookings.json', 'utf-8'))
 
 export const fetchAllBookings = (): BookingInterface[] => {
     return bookings;

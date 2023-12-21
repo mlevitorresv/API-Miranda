@@ -1,5 +1,7 @@
-import users from '../data/users.json'
+import fs from 'fs'
 import { UserInterface } from '../models/user';
+
+const users: UserInterface[] = JSON.parse(fs.readFileSync('./data/users.json', 'utf-8'))
 
 export const fetchAllUsers = (): UserInterface[] => {
     return users;
