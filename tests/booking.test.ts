@@ -1,7 +1,10 @@
 const request = require('supertest');
 import app from '../app'
 import { generateToken } from '../middleware/auth';
-import bookings from '../data/bookings.json'
+import { BookingInterface } from '../models/booking';
+import fs from 'fs'
+
+const bookings: BookingInterface[] = JSON.parse(fs.readFileSync('./data/bookings.json', 'utf-8'))
 
 describe('Bookings Endpoints', () => {
     const token = generateToken('test@test.com', 'test1234')

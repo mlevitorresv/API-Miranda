@@ -1,7 +1,10 @@
 const request = require('supertest');
 import app from '../app'
 import { generateToken } from '../middleware/auth';
-import contacts from '../data/comment.json'
+import fs from 'fs'
+import { ContactInterface } from '../models/contact';
+
+const contacts: ContactInterface[] = JSON.parse(fs.readFileSync('./data/comment.json', 'utf-8'))
 
 describe('Contacts Endpoints', () => {
     const token = generateToken('test@test.com', 'test1234')

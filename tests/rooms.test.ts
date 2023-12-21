@@ -1,7 +1,10 @@
 const request = require('supertest');
 import app from '../app'
 import { generateToken } from '../middleware/auth';
-import rooms from '../data/rooms.json'
+import fs from 'fs'
+import { RoomInterface } from '../models/room';
+
+const rooms: RoomInterface[] = JSON.parse(fs.readFileSync('./data/rooms.json', 'utf-8'))
 
 describe('Rooms Endpoints', () => {
     const token = generateToken('test@test.com', 'test1234')

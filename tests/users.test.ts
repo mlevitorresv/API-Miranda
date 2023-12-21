@@ -1,7 +1,10 @@
 const request = require('supertest');
 import app from '../app'
 import { generateToken } from '../middleware/auth';
-import users from '../data/users.json'
+import fs from 'fs'
+import { UserInterface } from '../models/user';
+
+const users: UserInterface[] = JSON.parse(fs.readFileSync('./data/users.json', 'utf-8'))
 
 describe('Users Endpoints', () => {
     const token = generateToken('test@test.com', 'test1234')
