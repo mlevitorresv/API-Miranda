@@ -7,7 +7,7 @@ import { UserInterface } from '../models/user';
 const users: UserInterface[] = JSON.parse(fs.readFileSync('./data/users.json', 'utf-8'))
 
 describe('Users Endpoints', () => {
-    const token = generateToken('test@test.com', 'test1234')
+    const token = process.env.USER_ADMIN && process.env.PASSWORD_ADMIN ? generateToken(process.env.USER_ADMIN, process.env.PASSWORD_ADMIN): ''    
     it('should return all users', async () => {
         const response = await request(app)
             .get('/users')

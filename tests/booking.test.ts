@@ -7,7 +7,8 @@ import fs from 'fs'
 const bookings: BookingInterface[] = JSON.parse(fs.readFileSync('./data/bookings.json', 'utf-8'))
 
 describe('Bookings Endpoints', () => {
-    const token = generateToken('test@test.com', 'test1234')
+
+    const token = process.env.USER_ADMIN && process.env.PASSWORD_ADMIN ? generateToken(process.env.USER_ADMIN, process.env.PASSWORD_ADMIN): ''
     it('should return all bookings', async () => {
         const response = await request(app)
             .get('/bookings')

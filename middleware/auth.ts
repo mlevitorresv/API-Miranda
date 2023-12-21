@@ -11,7 +11,7 @@ const secretKey = process.env.SECRET_KEY;
 
 
 export const generateToken = (email: string, password: string) => {
-    if(email === 'test@test.com' && password === 'test1234'){
+    if(email === process.env.USER_ADMIN && password === process.env.PASSWORD_ADMIN){
         if(secretKey){
             return jwt.sign({email}, secretKey, {expiresIn: '24h'});
         }
