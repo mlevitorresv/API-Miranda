@@ -17,18 +17,16 @@ export const authMiddleware = (req: AuthenticatedRequest, res: Response, next: N
     if(!authHeader)
         return res.status(401).json({error: true, message: 'no auth header'})
     const token = authHeader.split('Bearer ')[1];
-
-    if(!token){
+    if(!token)
         return res.status(401).json({error: 'Unauthorized: Missing Token'});
-    }
-    else{
-        if(secretKey){
-            jwt.verify(token, secretKey, (err: any, user: any) => {
-                if(err) return res.status(403).json({error: 'Invalid token'});
-                req.user = user;
-                next();
-            })
-        }
-        
+
+    if(!secretKey)
+        return res.status(500).json({error: 'internal server error'})
+    try{
+        const data = jwt.verify(token, secretKey);
+        req.user = data;
+        next();
+    }catch (e){
+        return res.status(403).json({error: 'Invalid token'});
     }
 }
