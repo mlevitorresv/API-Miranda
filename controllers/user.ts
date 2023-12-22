@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { fetchAllUsers, fetchUserById } from '../services/user';
+import { deleteUser, fetchAllUsers, fetchUserById, patchUser, postUser, putUser } from '../services/user';
 import { UserInterface } from '../models/user';
 
 
@@ -17,17 +17,17 @@ userRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 userRouter.post('/', (req: Request, res: Response)=>{
-    res.json({success: true, user: req.body})
+    res.json(postUser(req.body))
 })
 
 userRouter.put('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json(putUser())
 })
 
 userRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.json({success: true, user: req.body})
+    res.json(patchUser(req.body))
 })
 
 userRouter.delete('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json(deleteUser())
 })

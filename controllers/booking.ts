@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { fetchAllBookings, fetchBookingById } from '../services/booking';
+import { deleteBooking, fetchAllBookings, fetchBookingById, patchBooking, postBooking, putBooking } from '../services/booking';
 import { BookingInterface } from '../models/booking';
 
 export const bookingRouter = express.Router();
@@ -16,17 +16,17 @@ bookingRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 bookingRouter.post('/', (req: Request, res: Response)=>{
-    res.json({success: true, booking: req.body})
+    res.json(postBooking(req.body))
 })
 
 bookingRouter.put('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json(putBooking())
 })
 
 bookingRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.json({success: true, booking: req.body})
+    res.json(patchBooking(req.body))
 })
 
 bookingRouter.delete('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json(deleteBooking())
 })

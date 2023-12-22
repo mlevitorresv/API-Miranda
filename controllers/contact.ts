@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { fetchAllContacts, fetchContactById } from '../services/contact';
+import { deleteContact, fetchAllContacts, fetchContactById, patchContact, postContact, putContact } from '../services/contact';
 import { ContactInterface } from '../models/contact';
 
 export const contactRouter = express.Router();
@@ -16,17 +16,17 @@ contactRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 contactRouter.post('/', (req: Request, res: Response)=>{
-    res.json({success: true, comment: req.body})
+    res.json(postContact(req.body))
 })
 
 contactRouter.put('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json(putContact())
 })
 
 contactRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.json({success: true, comment: req.body})
+    res.json(patchContact(req.body))
 })
 
 contactRouter.delete('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json(deleteContact())
 })

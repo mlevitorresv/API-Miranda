@@ -10,3 +10,19 @@ export const fetchAllBookings = (): BookingInterface[] => {
 export const fetchBookingById = (id: number): BookingInterface | undefined => {
     return bookings.find((booking) => booking.id === id)
 }
+
+export const postBooking = (booking: BookingInterface) => {
+    return {succes: true, booking: booking}
+}
+
+export const putBooking = () => {
+    return {succes: true}
+}
+
+export const patchBooking = (booking: BookingInterface) => {
+    return {succes: true, booking: booking}
+}
+
+export const deleteBooking = () => {
+    return {succes: true}
+}

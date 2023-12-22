@@ -10,3 +10,19 @@ export const fetchAllUsers = (): UserInterface[] => {
 export const fetchUserById = (id: number): UserInterface | undefined => {
     return users.find((user) => user.id === id)
 }
+
+export const postUser = (user: UserInterface) => {
+    return {succes: true, user: user}
+}
+
+export const putUser = () => {
+    return {succes: true}
+}
+
+export const patchUser = (user: UserInterface) => {
+    return {succes: true, user: user}
+}
+
+export const deleteUser = () => {
+    return {succes: true}
+}

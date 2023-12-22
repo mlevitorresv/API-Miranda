@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { fetchAllRooms, fetchRoomById } from '../services/room';
+import { deleteRoom, fetchAllRooms, fetchRoomById, patchRoom, postRoom, putRoom } from '../services/room';
 import { RoomInterface } from '../models/room';
 
 export const roomRouter = express.Router();
@@ -16,17 +16,17 @@ roomRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 roomRouter.post('/', (req: Request, res: Response)=>{
-    res.json({success: true, room: req.body})
+    res.json(postRoom(req.body))
 })
 
 roomRouter.put('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json(putRoom())
 })
 
 roomRouter.patch('/:id', (req: Request, res: Response)=>{
-    res.json({success: true,  room: req.body})
+    res.json(patchRoom(req.body))
 })
 
 roomRouter.delete('/:id', (req: Request, res: Response)=>{
-    res.json({success: true})
+    res.json(deleteRoom())
 })
