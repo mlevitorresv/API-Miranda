@@ -11,7 +11,7 @@ bookingRouter.get('/', (req: Request, res: Response) => {
 
 bookingRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    const booking: BookingInterface | undefined  = fetchBookingById(parseInt(id));
+    const booking: BookingInterface  = fetchBookingById(parseInt(id));
     res.json({booking: booking})
 })
 

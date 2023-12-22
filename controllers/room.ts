@@ -11,7 +11,7 @@ roomRouter.get('/', (req: Request, res: Response) => {
 
 roomRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    const room: RoomInterface | undefined = fetchRoomById(parseInt(id));
+    const room: RoomInterface = fetchRoomById(parseInt(id));
     res.json({room: room})
 })
 

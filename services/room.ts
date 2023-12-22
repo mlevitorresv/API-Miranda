@@ -1,28 +1,34 @@
-import fs from 'fs'; 
+import fs from 'fs';
 import { RoomInterface } from '../models/room';
 
 const rooms: RoomInterface[] = JSON.parse(fs.readFileSync('./data/rooms.json', 'utf-8'))
 
 export const fetchAllRooms = (): RoomInterface[] => {
-    return rooms;
+    const allRooms = rooms;
+    if (!allRooms)
+        throw new Error('Cannot get all rooms')
+    return allRooms;
 }
 
-export const fetchRoomById = (id: number): RoomInterface | undefined => {
-    return rooms.find((room) => room.id === id)
+export const fetchRoomById = (id: number): RoomInterface => {
+    const room = rooms.find((room) => room.id === id)
+    if (!room)
+        throw new Error('Room not found')
+    return room;
 }
 
 export const postRoom = (room: RoomInterface) => {
-    return {succes: true, room: room}
+    return { succes: true, room: room }
 }
 
 export const putRoom = () => {
-    return {succes: true}
+    return { succes: true }
 }
 
 export const patchRoom = (room: RoomInterface) => {
-    return {succes: true, room: room}
+    return { succes: true, room: room }
 }
 
 export const deleteRoom = () => {
-    return {succes: true}
+    return { succes: true }
 }

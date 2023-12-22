@@ -12,7 +12,7 @@ userRouter.get('/', (req: Request, res: Response) => {
 
 userRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    const user: UserInterface | undefined = fetchUserById(parseInt(id));
+    const user: UserInterface = fetchUserById(parseInt(id));
     res.json({user: user})
 })
 

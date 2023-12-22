@@ -4,11 +4,17 @@ import fs from 'fs'
 const bookings: BookingInterface[] = JSON.parse(fs.readFileSync('./data/bookings.json', 'utf-8'))
 
 export const fetchAllBookings = (): BookingInterface[] => {
-    return bookings;
+    const allBookings = bookings;
+    if(!allBookings)
+        throw new Error('Cannot get all bookings')
+    return allBookings;
 }
 
-export const fetchBookingById = (id: number): BookingInterface | undefined => {
-    return bookings.find((booking) => booking.id === id)
+export const fetchBookingById = (id: number): BookingInterface => {
+    const booking = bookings.find((booking) => booking.id === id)
+    if(!booking)
+        throw new Error('Booking not found')
+    return booking;
 }
 
 export const postBooking = (booking: BookingInterface) => {

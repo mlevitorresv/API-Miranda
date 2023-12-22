@@ -11,7 +11,7 @@ contactRouter.get('/', (req: Request, res: Response) => {
 
 contactRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
-    const contact: ContactInterface  | undefined = fetchContactById(parseInt(id))
+    const contact: ContactInterface = fetchContactById(parseInt(id))
     res.json({contact: contact})
 })
 
