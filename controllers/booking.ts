@@ -6,13 +6,13 @@ export const bookingRouter = express.Router();
 
 bookingRouter.get('/', (req: Request, res: Response) => {
     const allBookings: BookingInterface[] = fetchAllBookings();
-    res.json(allBookings)
+    res.json({bookings: allBookings})
 })
 
 bookingRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
     const booking: BookingInterface | undefined  = fetchBookingById(parseInt(id));
-    res.json(booking)
+    res.json({booking: booking})
 })
 
 bookingRouter.post('/new', (req: Request, res: Response)=>{

@@ -6,13 +6,13 @@ export const roomRouter = express.Router();
 
 roomRouter.get('/', (req: Request, res: Response) => {
     const allRooms: RoomInterface[] = fetchAllRooms();
-    res.json(allRooms)
+    res.json({rooms: allRooms})
 })
 
 roomRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
     const room: RoomInterface | undefined = fetchRoomById(parseInt(id));
-    res.json(room)
+    res.json({room: room})
 })
 
 roomRouter.post('/new', (req: Request, res: Response)=>{

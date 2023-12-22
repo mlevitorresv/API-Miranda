@@ -6,13 +6,13 @@ export const contactRouter = express.Router();
 
 contactRouter.get('/', (req: Request, res: Response) => {
     const allContacts: ContactInterface[] = fetchAllContacts();
-    res.json(allContacts)
+    res.json({contacts: allContacts})
 })
 
 contactRouter.get('/:id', (req: Request, res: Response) => {
     const id: string  = req.params.id;
     const contact: ContactInterface  | undefined = fetchContactById(parseInt(id))
-    res.json(contact)
+    res.json({contact: contact})
 })
 
 contactRouter.post('/new', (req: Request, res: Response)=>{
