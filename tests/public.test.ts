@@ -1,5 +1,5 @@
 const request = require('supertest');
-import app from '../app'
+import {app} from '../app'
 
 
 describe('public tests', () => {

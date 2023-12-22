@@ -6,7 +6,7 @@ import { bookingRouter } from './controllers/booking'
 import { authMiddleware } from './middleware/auth'
 import { publicRouter } from './public'
 import { loginRouter } from './controllers/login'
-const app = express()
+export const app = express()
 
 app.use(express.json())
 
@@ -22,5 +22,3 @@ app.use('/users', userRouter)
 app.use('/contacts', contactRouter)
 
 app.use('/bookings', bookingRouter)
- 
-export default app;

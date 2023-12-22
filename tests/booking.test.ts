@@ -1,5 +1,5 @@
 const request = require('supertest');
-import app from '../app'
+import {app} from '../app'
 import { generateToken } from '../services/login';
 import { BookingInterface } from '../models/booking';
 import fs from 'fs'
