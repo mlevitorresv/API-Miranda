@@ -1,4 +1,4 @@
-export interface UserInterface{
+export interface UserInterface {
     photo: string,
     id: number,
     name: string,

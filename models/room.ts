@@ -1,4 +1,4 @@
-export interface RoomInterface{
+export interface RoomInterface {
     photo: string,
     id: number,
     type: string,

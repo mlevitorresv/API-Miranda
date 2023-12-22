@@ -1,5 +1,5 @@
 const request = require('supertest');
-import {app} from '../app'
+import { app } from '../app'
 import { generateToken } from '../services/login';
 import { BookingInterface } from '../models/booking';
 import fs from 'fs'
@@ -8,7 +8,7 @@ const bookings: BookingInterface[] = JSON.parse(fs.readFileSync('./data/bookings
 
 describe('Bookings Endpoints', () => {
 
-    const token = process.env.USER_ADMIN && process.env.PASSWORD_ADMIN ? generateToken(process.env.USER_ADMIN): ''
+    const token = process.env.USER_ADMIN && process.env.PASSWORD_ADMIN ? generateToken(process.env.USER_ADMIN) : ''
     it('should return all bookings', async () => {
         const response = await request(app)
             .get('/bookings')
@@ -38,19 +38,19 @@ describe('Bookings Endpoints', () => {
             .put('/bookings/101')
             .set('Authorization', `Bearer ${token}`)
 
-            expect(response.statusCode).toEqual(200)
-            expect(response.body).toEqual({ 'success': true })
+        expect(response.statusCode).toEqual(200)
+        expect(response.body).toEqual({ 'success': true })
 
     })
 
     it('should return an object informing correctly about updated element and body data', async () => {
         const response = await request(app)
             .patch('/bookings/101')
-            .send({id: 1, name: 'Andrés', notes: 'prueba'})
+            .send({ id: 1, name: 'Andrés', notes: 'prueba' })
             .set('Authorization', `Bearer ${token}`)
 
-            expect(response.statusCode).toEqual(200)
-            expect(response.body).toEqual({ 'success': true, booking:{id: 1, name: 'Andrés', notes: 'prueba'}})
+        expect(response.statusCode).toEqual(200)
+        expect(response.body).toEqual({ 'success': true, booking: { id: 1, name: 'Andrés', notes: 'prueba' } })
     })
 
     it('should return an object informing correctly about removed element', async () => {
@@ -58,19 +58,19 @@ describe('Bookings Endpoints', () => {
             .delete('/bookings/101')
             .set('Authorization', `Bearer ${token}`)
 
-            expect(response.statusCode).toEqual(200)
-            expect(response.body).toEqual({ 'success': true })
+        expect(response.statusCode).toEqual(200)
+        expect(response.body).toEqual({ 'success': true })
 
     })
 
     it('should return an object informing correctly about created element and body data', async () => {
         const response = await request(app)
             .post('/bookings/new')
-            .send({id: 1, name: 'Andrés', notes: 'prueba'})
+            .send({ id: 1, name: 'Andrés', notes: 'prueba' })
             .set('Authorization', `Bearer ${token}`)
 
-            expect(response.statusCode).toEqual(200)
-            expect(response.body).toEqual({ 'success': true, booking:{id: 1, name: 'Andrés', notes: 'prueba'}})
+        expect(response.statusCode).toEqual(200)
+        expect(response.body).toEqual({ 'success': true, booking: { id: 1, name: 'Andrés', notes: 'prueba' } })
 
     })
 })

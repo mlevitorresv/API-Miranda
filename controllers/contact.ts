@@ -6,27 +6,27 @@ export const contactRouter = express.Router();
 
 contactRouter.get('/', (req: Request, res: Response) => {
     const allContacts: ContactInterface[] = fetchAllContacts();
-    res.json({contacts: allContacts})
+    res.json({ contacts: allContacts })
 })
 
 contactRouter.get('/:id', (req: Request, res: Response) => {
-    const id: string  = req.params.id;
+    const id: string = req.params.id;
     const contact: ContactInterface = fetchContactById(parseInt(id))
-    res.json({contact: contact})
+    res.json({ contact: contact })
 })
 
-contactRouter.post('/', (req: Request, res: Response)=>{
+contactRouter.post('/', (req: Request, res: Response) => {
     res.json(postContact(req.body))
 })
 
-contactRouter.put('/:id', (req: Request, res: Response)=>{
+contactRouter.put('/:id', (req: Request, res: Response) => {
     res.json(putContact())
 })
 
-contactRouter.patch('/:id', (req: Request, res: Response)=>{
+contactRouter.patch('/:id', (req: Request, res: Response) => {
     res.json(patchContact(req.body))
 })
 
-contactRouter.delete('/:id', (req: Request, res: Response)=>{
+contactRouter.delete('/:id', (req: Request, res: Response) => {
     res.json(deleteContact())
 })

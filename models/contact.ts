@@ -1,4 +1,4 @@
-export interface ContactInterface{
+export interface ContactInterface {
     photo: string
     id: number
     name: string

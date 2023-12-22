@@ -1,5 +1,5 @@
 const request = require('supertest');
-import {app} from '../app'
+import { app } from '../app'
 
 describe('login tests', () => {
     it('should return a json with credentials error', async () => {
