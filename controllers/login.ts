@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { generateToken } from "../middleware/auth";
+import { generateToken } from "../services/login";
 
 export const loginRouter = express.Router();
 
