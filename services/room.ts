@@ -18,17 +18,17 @@ export const fetchRoomById = (id: number): RoomInterface => {
 }
 
 export const postRoom = (room: RoomInterface) => {
-    return { succes: true, room: room }
+    return { success: true, room: room }
 }
 
 export const putRoom = () => {
-    return { succes: true }
+    return { success: true }
 }
 
 export const patchRoom = (room: RoomInterface) => {
-    return { succes: true, room: room }
+    return { success: true, room: room }
 }
 
 export const deleteRoom = () => {
-    return { succes: true }
+    return { success: true }
 }

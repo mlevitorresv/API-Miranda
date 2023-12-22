@@ -13,7 +13,7 @@ describe('Users Endpoints', () => {
             .get('/users')
             .set('Authorization', `Bearer ${token}`)
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual(users)
+        expect(response.body).toEqual({users: users})
     })
 
     it('should return status 401 (no token)', async () => {
@@ -29,7 +29,7 @@ describe('Users Endpoints', () => {
             .set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual(users[100])
+        expect(response.body).toEqual({user: users[100]})
     })
 
     it('should return an object informing correctly about updated element', async () => {
@@ -64,7 +64,7 @@ describe('Users Endpoints', () => {
 
     it('should return an object informing correctly about created element and body data', async () => {
         const response = await request(app)
-            .post('/users/new')
+            .post('/users')
             .send({ id: 1, name: 'Andrés' })
             .set('Authorization', `Bearer ${token}`)
 

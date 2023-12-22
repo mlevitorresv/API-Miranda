@@ -13,7 +13,7 @@ describe('Rooms Endpoints', () => {
             .get('/rooms')
             .set('Authorization', `Bearer ${token}`)
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual(rooms)
+        expect(response.body).toEqual({rooms: rooms})
     })
 
     it('should return status 401 (no token)', async () => {
@@ -29,7 +29,7 @@ describe('Rooms Endpoints', () => {
             .set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual(rooms[100])
+        expect(response.body).toEqual({ room: rooms[100] })
     })
 
     it('should return an object informing correctly about updated element', async () => {
@@ -64,7 +64,7 @@ describe('Rooms Endpoints', () => {
 
     it('should return an object informing correctly about created element and body data', async () => {
         const response = await request(app)
-            .post('/rooms/new')
+            .post('/rooms')
             .send({ id: 1, name: 'suite' })
             .set('Authorization', `Bearer ${token}`)
 

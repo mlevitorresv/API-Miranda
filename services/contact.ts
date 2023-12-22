@@ -18,17 +18,17 @@ export const fetchContactById = (id: number): ContactInterface => {
 }
 
 export const postContact = (contact: ContactInterface) => {
-    return { succes: true, contact: contact }
+    return { success: true, contact: contact }
 }
 
 export const putContact = () => {
-    return { succes: true }
+    return { success: true }
 }
 
 export const patchContact = (contact: ContactInterface) => {
-    return { succes: true, contact: contact }
+    return { success: true, contact: contact }
 }
 
 export const deleteContact = () => {
-    return { succes: true }
+    return { success: true }
 }

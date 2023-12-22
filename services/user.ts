@@ -18,17 +18,17 @@ export const fetchUserById = (id: number): UserInterface => {
 }
 
 export const postUser = (user: UserInterface) => {
-    return { succes: true, user: user }
+    return { success: true, user: user }
 }
 
 export const putUser = () => {
-    return { succes: true }
+    return { success: true }
 }
 
 export const patchUser = (user: UserInterface) => {
-    return { succes: true, user: user }
+    return { success: true, user: user }
 }
 
 export const deleteUser = () => {
-    return { succes: true }
+    return { success: true }
 }

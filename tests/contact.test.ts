@@ -13,7 +13,7 @@ describe('Contacts Endpoints', () => {
             .get('/contacts')
             .set('Authorization', `Bearer ${token}`)
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual(contacts)
+        expect(response.body).toEqual({contacts: contacts})
     })
 
     it('should return status 401 (no token)', async () => {
@@ -29,7 +29,7 @@ describe('Contacts Endpoints', () => {
             .set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual(contacts[100])
+        expect(response.body).toEqual({contact: contacts[100]})
     })
 
     it('should return an object informing correctly about updated element', async () => {
@@ -49,7 +49,7 @@ describe('Contacts Endpoints', () => {
             .set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual({ 'success': true, comment: { id: 1, name: 'Andrés', comment: 'prueba' } })
+        expect(response.body).toEqual({ 'success': true, contact: { id: 1, name: 'Andrés', comment: 'prueba' } })
     })
 
     it('should return an object informing correctly about removed element', async () => {
@@ -64,12 +64,12 @@ describe('Contacts Endpoints', () => {
 
     it('should return an object informing correctly about created element and body data', async () => {
         const response = await request(app)
-            .post('/contacts/new')
+            .post('/contacts')
             .send({ id: 1, name: 'Andrés', comment: 'prueba' })
             .set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual({ 'success': true, comment: { id: 1, name: 'Andrés', comment: 'prueba' } })
+        expect(response.body).toEqual({ 'success': true, contact: { id: 1, name: 'Andrés', comment: 'prueba' } })
 
     })
 })

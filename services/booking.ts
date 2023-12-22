@@ -18,17 +18,17 @@ export const fetchBookingById = (id: number): BookingInterface => {
 }
 
 export const postBooking = (booking: BookingInterface) => {
-    return { succes: true, booking: booking }
+    return { success: true, booking: booking }
 }
 
 export const putBooking = () => {
-    return { succes: true }
+    return { success: true }
 }
 
 export const patchBooking = (booking: BookingInterface) => {
-    return { succes: true, booking: booking }
+    return { success: true, booking: booking }
 }
 
 export const deleteBooking = () => {
-    return { succes: true }
+    return { success: true }
 }

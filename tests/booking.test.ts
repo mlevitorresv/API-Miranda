@@ -14,7 +14,7 @@ describe('Bookings Endpoints', () => {
             .get('/bookings')
             .set('Authorization', `Bearer ${token}`)
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual(bookings)
+        expect(response.body).toEqual({bookings: bookings})
     })
 
     it('should return status 401 (no token)', async () => {
@@ -30,7 +30,7 @@ describe('Bookings Endpoints', () => {
             .set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual(bookings[100])
+        expect(response.body).toEqual({booking: bookings[100]})
     })
 
     it('should return an object informing correctly about updated element', async () => {
@@ -65,12 +65,12 @@ describe('Bookings Endpoints', () => {
 
     it('should return an object informing correctly about created element and body data', async () => {
         const response = await request(app)
-            .post('/bookings/new')
+            .post('/bookings')
             .send({ id: 1, name: 'Andrés', notes: 'prueba' })
             .set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toEqual(200)
-        expect(response.body).toEqual({ 'success': true, booking: { id: 1, name: 'Andrés', notes: 'prueba' } })
+        expect(response.body).toEqual({ 'success': true, 'booking': { id: 1, name: 'Andrés', notes: 'prueba' } })
 
     })
 })

@@ -7,6 +7,6 @@ describe('public tests', () => {
         const response = await request(app)
             .get('/public')
 
-        expect(response.text).toContain('MIRANDA HOTEL');
+        expect(response.text).toContain('Hotel Miranda');
     })
 })
