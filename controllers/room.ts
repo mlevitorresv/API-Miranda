@@ -15,7 +15,7 @@ roomRouter.get('/:id', (req: Request, res: Response) => {
     res.json({room: room})
 })
 
-roomRouter.post('/new', (req: Request, res: Response)=>{
+roomRouter.post('/', (req: Request, res: Response)=>{
     res.json({success: true, room: req.body})
 })
 

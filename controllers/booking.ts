@@ -15,7 +15,7 @@ bookingRouter.get('/:id', (req: Request, res: Response) => {
     res.json({booking: booking})
 })
 
-bookingRouter.post('/new', (req: Request, res: Response)=>{
+bookingRouter.post('/', (req: Request, res: Response)=>{
     res.json({success: true, booking: req.body})
 })
 

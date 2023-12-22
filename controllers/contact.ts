@@ -15,7 +15,7 @@ contactRouter.get('/:id', (req: Request, res: Response) => {
     res.json({contact: contact})
 })
 
-contactRouter.post('/new', (req: Request, res: Response)=>{
+contactRouter.post('/', (req: Request, res: Response)=>{
     res.json({success: true, comment: req.body})
 })
 

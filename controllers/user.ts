@@ -16,7 +16,7 @@ userRouter.get('/:id', (req: Request, res: Response) => {
     res.json({user: user})
 })
 
-userRouter.post('/new', (req: Request, res: Response)=>{
+userRouter.post('/', (req: Request, res: Response)=>{
     res.json({success: true, user: req.body})
 })
 
