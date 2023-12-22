@@ -8,7 +8,7 @@ const bookings: BookingInterface[] = JSON.parse(fs.readFileSync('./data/bookings
 
 describe('Bookings Endpoints', () => {
 
-    const token = process.env.USER_ADMIN && process.env.PASSWORD_ADMIN ? generateToken(process.env.USER_ADMIN, process.env.PASSWORD_ADMIN): ''
+    const token = process.env.USER_ADMIN && process.env.PASSWORD_ADMIN ? generateToken(process.env.USER_ADMIN): ''
     it('should return all bookings', async () => {
         const response = await request(app)
             .get('/bookings')

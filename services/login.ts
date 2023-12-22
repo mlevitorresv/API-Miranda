@@ -6,14 +6,9 @@ dotenv.config();
 const secretKey = process.env.SECRET_KEY;
 
 
-export const generateToken = (email: string, password: string) => {
-    if(email === process.env.USER_ADMIN && password === process.env.PASSWORD_ADMIN){
-        if(secretKey){
-            return jwt.sign({email}, secretKey);
-        }
-        else{
+export const generateToken = (data: string) => {
+        if(!secretKey)
             throw new Error('Secret Key not defined.')
-        }
-    }
-    return null;
+        return jwt.sign(data, secretKey);
+
 }

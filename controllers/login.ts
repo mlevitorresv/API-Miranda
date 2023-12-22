@@ -5,7 +5,7 @@ export const loginRouter = express.Router();
 
 loginRouter.post('/', async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    const userToken = generateToken(email, password);
+    const userToken = email === process.env.USER_ADMIN &&  password === process.env.PASSWORD_ADMIN ? generateToken(email) : '';
 
     if(userToken){
         res.json({token: userToken})

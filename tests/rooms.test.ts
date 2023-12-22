@@ -7,7 +7,7 @@ import { RoomInterface } from '../models/room';
 const rooms: RoomInterface[] = JSON.parse(fs.readFileSync('./data/rooms.json', 'utf-8'))
 
 describe('Rooms Endpoints', () => {
-    const token = process.env.USER_ADMIN && process.env.PASSWORD_ADMIN ? generateToken(process.env.USER_ADMIN, process.env.PASSWORD_ADMIN): ''    
+    const token = process.env.USER_ADMIN && process.env.PASSWORD_ADMIN ? generateToken(process.env.USER_ADMIN): ''    
     it('should return all rooms', async () => {
         const response = await request(app)
             .get('/rooms')
