@@ -1,3 +1,5 @@
+import { Schema } from "mongoose"
+
 export interface RoomInterface {
     photo: string,
     id: number,
@@ -10,3 +12,15 @@ export interface RoomInterface {
     discount: number,
     available: boolean
 }
+
+export const roomSchema = new Schema({
+    photo: String,
+    type: String,
+    bed: String,
+    amenities: String,
+    description: String,
+    rate: Number,
+    price: Number,
+    discount: Number,
+    available: Boolean
+})
