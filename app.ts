@@ -4,7 +4,7 @@ import { userRouter } from './controllers/user'
 import { contactRouter } from './controllers/contact'
 import { bookingRouter } from './controllers/booking'
 import { authMiddleware } from './middleware/auth'
-import { publicRouter } from './public'
+import { publicRouter } from './public/public'
 import { loginRouter } from './controllers/login'
 export const app = express()
 

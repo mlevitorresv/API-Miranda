@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 import expressListEndpoints from 'express-list-endpoints';
-import { app } from './app';
+import { app } from '../app';
 
 
 export const publicRouter = express.Router();
