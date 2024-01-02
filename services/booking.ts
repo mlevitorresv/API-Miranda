@@ -1,23 +1,15 @@
-import { BookingInterface } from '../models/booking';
-import fs from 'fs'
+import { BookingInterface, BookingModel } from '../models/booking';
 
-const bookings: BookingInterface[] = JSON.parse(fs.readFileSync('./data/bookings.json', 'utf-8'))
 
-export const fetchAllBookings = (): BookingInterface[] => {
-    const allBookings = bookings;
-    if (!allBookings)
-        throw new Error('Cannot get all bookings')
-    return allBookings;
+export const fetchAllBookings = async (): Promise<BookingInterface[]> => {
+    return await BookingModel.find();
 }
 
-export const fetchBookingById = (id: number): BookingInterface => {
-    const booking = bookings.find((booking) => booking.id === id)
-    if (!booking)
-        throw new Error('Booking not found')
-    return booking;
+export const fetchBookingById = async (id: number): Promise<BookingInterface | null> => {
+    return await BookingModel.findById(id);
 }
 
-export const postBooking = (booking: BookingInterface) => {
+export const postBooking = async(booking: BookingInterface) => {
     return { success: true, booking: booking }
 }
 

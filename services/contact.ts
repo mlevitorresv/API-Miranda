@@ -1,20 +1,11 @@
-import fs from 'fs'
-import { ContactInterface } from '../models/contact';
+import { ContactInterface, ContactModel } from '../models/contact';
 
-const contacts: ContactInterface[] = JSON.parse(fs.readFileSync('./data/comment.json', 'utf-8'))
-
-export const fetchAllContacts = (): ContactInterface[] => {
-    const allContacts = contacts;
-    if (!allContacts)
-        throw new Error('Cannot get all contacts')
-    return allContacts;
+export const fetchAllContacts = async (): Promise<ContactInterface[]> => {
+    return await ContactModel.find();
 }
 
-export const fetchContactById = (id: number): ContactInterface => {
-    const contact = contacts.find((contact) => contact.id === id)
-    if (!contact)
-        throw new Error('Contact not found')
-    return contact;
+export const fetchContactById = async (id: number): Promise<ContactInterface | null> => {
+    return await ContactModel.findById(id);
 }
 
 export const postContact = (contact: ContactInterface) => {

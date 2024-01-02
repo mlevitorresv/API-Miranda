@@ -4,14 +4,14 @@ import { BookingInterface } from '../models/booking';
 
 export const bookingRouter = express.Router();
 
-bookingRouter.get('/', (req: Request, res: Response) => {
-    const allBookings: BookingInterface[] = fetchAllBookings();
+bookingRouter.get('/', async (req: Request, res: Response) => {
+    const allBookings: BookingInterface[] = await fetchAllBookings();
     res.json({ bookings: allBookings })
 })
 
-bookingRouter.get('/:id', (req: Request, res: Response) => {
+bookingRouter.get('/:id', async (req: Request, res: Response) => {
     const id: string = req.params.id;
-    const booking: BookingInterface = fetchBookingById(parseInt(id));
+    const booking: BookingInterface | null = await fetchBookingById(parseInt(id));
     res.json({ booking: booking })
 })
 

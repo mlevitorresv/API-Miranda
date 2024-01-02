@@ -1,20 +1,12 @@
-import fs from 'fs'
-import { UserInterface } from '../models/user';
+import { UserInterface, UserModel } from '../models/user';
 
-const users: UserInterface[] = JSON.parse(fs.readFileSync('./data/users.json', 'utf-8'))
 
-export const fetchAllUsers = (): UserInterface[] => {
-    const allUsers = users;
-    if (!allUsers)
-        throw new Error('Cannot get all users')
-    return allUsers;
+export const fetchAllUsers = async (): Promise<UserInterface[]> => {
+    return await UserModel.find();
 }
 
-export const fetchUserById = (id: number): UserInterface => {
-    const user = users.find((user) => user.id === id)
-    if (!user)
-        throw new Error('User not found')
-    return user;
+export const fetchUserById = async (id: number): Promise<UserInterface | null> => {
+    return await UserModel.findById(id);
 }
 
 export const postUser = (user: UserInterface) => {

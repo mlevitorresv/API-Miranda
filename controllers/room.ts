@@ -4,14 +4,14 @@ import { RoomInterface } from '../models/room';
 
 export const roomRouter = express.Router();
 
-roomRouter.get('/', (req: Request, res: Response) => {
-    const allRooms: RoomInterface[] = fetchAllRooms();
+roomRouter.get('/', async (req: Request, res: Response) => {
+    const allRooms: RoomInterface[] = await fetchAllRooms();
     res.json({ rooms: allRooms })
 })
 
-roomRouter.get('/:id', (req: Request, res: Response) => {
+roomRouter.get('/:id', async (req: Request, res: Response) => {
     const id: string = req.params.id;
-    const room: RoomInterface = fetchRoomById(parseInt(id));
+    const room: RoomInterface | null = await fetchRoomById(parseInt(id));
     res.json({ room: room })
 })
 

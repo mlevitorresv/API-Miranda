@@ -5,14 +5,14 @@ import { UserInterface } from '../models/user';
 
 export const userRouter = express.Router();
 
-userRouter.get('/', (req: Request, res: Response) => {
-    const allUsers: UserInterface[] = fetchAllUsers();
+userRouter.get('/', async (req: Request, res: Response) => {
+    const allUsers: UserInterface[] = await fetchAllUsers();
     res.json({ users: allUsers })
 })
 
-userRouter.get('/:id', (req: Request, res: Response) => {
+userRouter.get('/:id', async(req: Request, res: Response) => {
     const id: string = req.params.id;
-    const user: UserInterface = fetchUserById(parseInt(id));
+    const user: UserInterface | null = await fetchUserById(parseInt(id));
     res.json({ user: user })
 })
 

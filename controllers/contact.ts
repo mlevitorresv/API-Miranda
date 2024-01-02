@@ -4,14 +4,14 @@ import { ContactInterface } from '../models/contact';
 
 export const contactRouter = express.Router();
 
-contactRouter.get('/', (req: Request, res: Response) => {
-    const allContacts: ContactInterface[] = fetchAllContacts();
+contactRouter.get('/', async (req: Request, res: Response) => {
+    const allContacts: ContactInterface[] = await fetchAllContacts();
     res.json({ contacts: allContacts })
 })
 
-contactRouter.get('/:id', (req: Request, res: Response) => {
+contactRouter.get('/:id', async (req: Request, res: Response) => {
     const id: string = req.params.id;
-    const contact: ContactInterface = fetchContactById(parseInt(id))
+    const contact: ContactInterface | null = await fetchContactById(parseInt(id))
     res.json({ contact: contact })
 })
 

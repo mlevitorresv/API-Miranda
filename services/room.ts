@@ -1,20 +1,11 @@
-import fs from 'fs';
-import { RoomInterface } from '../models/room';
+import { RoomInterface, RoomModel } from '../models/room';
 
-const rooms: RoomInterface[] = JSON.parse(fs.readFileSync('./data/rooms.json', 'utf-8'))
-
-export const fetchAllRooms = (): RoomInterface[] => {
-    const allRooms = rooms;
-    if (!allRooms)
-        throw new Error('Cannot get all rooms')
-    return allRooms;
+export const fetchAllRooms = async (): Promise<RoomInterface[]> => {
+    return await RoomModel.find();
 }
 
-export const fetchRoomById = (id: number): RoomInterface => {
-    const room = rooms.find((room) => room.id === id)
-    if (!room)
-        throw new Error('Room not found')
-    return room;
+export const fetchRoomById = async (id: number): Promise<RoomInterface | null> => {
+    return await RoomModel.findById(id);
 }
 
 export const postRoom = (room: RoomInterface) => {
