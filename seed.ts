@@ -1,5 +1,8 @@
 import { faker } from '@faker-js/faker'
 import { RoomInterface, RoomModel } from './models/room'
+import { mongoConnect } from './config/mongo'
+
+mongoConnect();
 
 const createRandomRoom = async () => {
     const room = new RoomModel({
