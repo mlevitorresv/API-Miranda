@@ -15,6 +15,7 @@ export interface RoomInterface {
 
 const roomSchema = new Schema({
     photo: String,
+    id: Number,
     type: String,
     bed: String,
     amenities: String,

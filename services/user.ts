@@ -6,11 +6,21 @@ export const fetchAllUsers = async (): Promise<UserInterface[]> => {
 }
 
 export const fetchUserById = async (id: number): Promise<UserInterface | null> => {
-    return await UserModel.findById(id);
+    return await UserModel.findOne({id: id});
 }
 
 export const postUser = (user: UserInterface) => {
-    return { success: true, user: user }
+    const data = new UserModel({
+        photo: user.photo,
+        name: user.name,
+        date: user.date,
+        email: user.email,
+        phone: user.phone,
+        description: user.description,
+        status: user.status
+    })
+    data.save();
+    return { success: true, user: data }
 }
 
 export const putUser = () => {

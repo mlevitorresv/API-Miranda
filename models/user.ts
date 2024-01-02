@@ -13,6 +13,7 @@ export interface UserInterface {
 
 const userSchema = new Schema({
     photo: String,
+    id: Number,
     name: String,
     date: String,
     email: String,

@@ -5,11 +5,24 @@ export const fetchAllRooms = async (): Promise<RoomInterface[]> => {
 }
 
 export const fetchRoomById = async (id: number): Promise<RoomInterface | null> => {
-    return await RoomModel.findById(id);
+    return await RoomModel.findOne({ id: id });
 }
 
 export const postRoom = (room: RoomInterface) => {
-    return { success: true, room: room }
+    const data = new RoomModel({
+        photo: room.photo,
+        id: room.id,
+        type: room.type,
+        bed: room.bed,
+        amenities: room.amenities,
+        description: room.description,
+        rate: room.rate,
+        price: room.price,
+        discount: room.discount,
+        available: room.available
+    })
+    data.save();
+    return { success: true, room: data }
 }
 
 export const putRoom = () => {

@@ -18,6 +18,7 @@ export interface BookingInterface {
 const bookingSchema = new Schema({
     photo: String,
     name: String,
+    id: Number,
     orderDate: String,
     orderTime: String,
     checkInDate: String,

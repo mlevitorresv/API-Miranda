@@ -15,6 +15,7 @@ export interface ContactInterface {
 
 const contactSchema = new Schema({
     photo: String,
+    id: Number,
     name: String,
     email: String,
     phone: String,

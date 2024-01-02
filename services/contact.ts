@@ -5,11 +5,23 @@ export const fetchAllContacts = async (): Promise<ContactInterface[]> => {
 }
 
 export const fetchContactById = async (id: number): Promise<ContactInterface | null> => {
-    return await ContactModel.findById(id);
+    return await ContactModel.findOne({id: id});
 }
 
 export const postContact = (contact: ContactInterface) => {
-    return { success: true, contact: contact }
+    const data = new ContactModel({
+        photo: contact.photo,
+        id: contact.id,
+        name: contact.name,
+        email: contact.email,
+        phone: contact.phone,
+        comment: contact.comment,
+        date: contact.date,
+        dateTime: contact.dateTime,
+        archived: contact.archived
+    })
+    data.save();
+    return { success: true, contact: data }
 }
 
 export const putContact = () => {

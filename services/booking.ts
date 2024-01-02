@@ -6,11 +6,26 @@ export const fetchAllBookings = async (): Promise<BookingInterface[]> => {
 }
 
 export const fetchBookingById = async (id: number): Promise<BookingInterface | null> => {
-    return await BookingModel.findById(id);
+    return await BookingModel.findOne({id: id});
 }
 
 export const postBooking = async(booking: BookingInterface) => {
-    return { success: true, booking: booking }
+    const data = new BookingModel({
+        photo: booking.photo,
+        name: booking.name,
+        id: booking.id,
+        orderDate: booking.orderDate,
+        orderTime: booking.orderTime,
+        checkInDate: booking.checkInDate,
+        checkInTime: booking.checkInTime,
+        checkOut: booking.checkOut,
+        checkOutTime: booking.checkOutTime,
+        notes: booking.notes,
+        room: booking.room,
+        status: booking.status
+    })
+    data.save();
+    return { success: true, booking: data }
 }
 
 export const putBooking = () => {
