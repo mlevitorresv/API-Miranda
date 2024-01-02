@@ -32,6 +32,7 @@ export const patchContact = (contact: ContactInterface) => {
     return { success: true, contact: contact }
 }
 
-export const deleteContact = () => {
+export const deleteContact = async(id: string) => {
+    await ContactModel.findOneAndDelete({id: id})
     return { success: true }
 }

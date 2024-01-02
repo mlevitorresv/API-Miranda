@@ -31,6 +31,7 @@ export const patchUser = (user: UserInterface) => {
     return { success: true, user: user }
 }
 
-export const deleteUser = () => {
+export const deleteUser = async(id: string) => {
+    await UserModel.findOneAndDelete({id: id})
     return { success: true }
 }

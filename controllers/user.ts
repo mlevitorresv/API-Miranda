@@ -29,5 +29,6 @@ userRouter.patch('/:id', (req: Request, res: Response) => {
 })
 
 userRouter.delete('/:id', (req: Request, res: Response) => {
-    res.json(deleteUser())
+    const id: string = req.params.id;
+    res.json(deleteUser(id))
 })

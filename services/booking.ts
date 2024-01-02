@@ -36,6 +36,7 @@ export const patchBooking = (booking: BookingInterface) => {
     return { success: true, booking: booking }
 }
 
-export const deleteBooking = () => {
+export const deleteBooking = async (id: string) => {
+    await BookingModel.findOneAndDelete({id: id})
     return { success: true }
 }

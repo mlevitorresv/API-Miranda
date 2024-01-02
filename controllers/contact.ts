@@ -28,5 +28,6 @@ contactRouter.patch('/:id', (req: Request, res: Response) => {
 })
 
 contactRouter.delete('/:id', (req: Request, res: Response) => {
-    res.json(deleteContact())
+    const id: string = req.params.id;
+    res.json(deleteContact(id))
 })

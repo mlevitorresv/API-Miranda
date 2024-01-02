@@ -33,6 +33,7 @@ export const patchRoom = (room: RoomInterface) => {
     return { success: true, room: room }
 }
 
-export const deleteRoom = () => {
+export const deleteRoom = async(id: string) => {
+    await RoomModel.findOneAndDelete({id:id})
     return { success: true }
 }

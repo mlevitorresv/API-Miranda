@@ -28,5 +28,6 @@ bookingRouter.patch('/:id', (req: Request, res: Response) => {
 })
 
 bookingRouter.delete('/:id', (req: Request, res: Response) => {
-    res.json(deleteBooking())
+    const id: string = req.params.id;
+    res.json(deleteBooking(id))
 })

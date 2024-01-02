@@ -28,5 +28,6 @@ roomRouter.patch('/:id', (req: Request, res: Response) => {
 })
 
 roomRouter.delete('/:id', (req: Request, res: Response) => {
-    res.json(deleteRoom())
+    const id: string = req.params.id;
+    res.json(deleteRoom(id))
 })
