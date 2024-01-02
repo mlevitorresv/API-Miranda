@@ -1,4 +1,4 @@
-import { Schema } from "mongoose"
+import { Schema, model } from "mongoose"
 
 export interface ContactInterface {
     photo: string
@@ -13,7 +13,7 @@ export interface ContactInterface {
 }
 
 
-export const contactSchema = new Schema({
+const contactSchema = new Schema({
     photo: String,
     name: String,
     email: String,
@@ -23,3 +23,5 @@ export const contactSchema = new Schema({
     dateTime: String,
     archived: Boolean
 })
+
+export const ContactModel = model<ContactInterface>('Contact', contactSchema); 

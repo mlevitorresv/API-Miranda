@@ -1,4 +1,4 @@
-import { Schema } from "mongoose"
+import { Schema, model } from "mongoose"
 
 export interface UserInterface {
     photo: string,
@@ -11,7 +11,7 @@ export interface UserInterface {
     status: string
 }
 
-export const userSchema = new Schema({
+const userSchema = new Schema({
     photo: String,
     name: String,
     date: String,
@@ -20,3 +20,5 @@ export const userSchema = new Schema({
     description: String,
     status: String
 })
+
+export const UserModel = model<UserInterface>('User', userSchema);

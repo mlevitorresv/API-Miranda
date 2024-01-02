@@ -1,4 +1,4 @@
-import { Schema } from "mongoose"
+import { Schema, model } from "mongoose"
 
 export interface BookingInterface {
     photo: string
@@ -15,7 +15,7 @@ export interface BookingInterface {
     status: string
 }
 
-export const bookingSchema = new Schema({
+const bookingSchema = new Schema({
     photo: String,
     name: String,
     orderDate: String,
@@ -28,3 +28,5 @@ export const bookingSchema = new Schema({
     room: String,
     status: String
 })
+
+export const BookingModel = model<BookingInterface>('Booking', bookingSchema);
