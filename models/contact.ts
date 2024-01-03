@@ -14,15 +14,15 @@ export interface ContactInterface {
 
 
 const contactSchema = new Schema({
-    photo: String,
-    id: Number,
-    name: String,
-    email: String,
-    phone: String,
-    comment: String,
-    date: String,
-    dateTime: String,
-    archived: Boolean
+    photo: {type: String, required: true},
+    id: {type: Number, required: true},
+    name: {type: String, required: true},
+    email: {type: String, required: true},
+    phone: {type: String, required: true},
+    comment: {type: String, required: true},
+    date: {type: String, required: true},
+    dateTime: {type: String, required: true},
+    archived: {type: Boolean, required: true}
 })
 
 export const ContactModel = model<ContactInterface>('Contact', contactSchema); 

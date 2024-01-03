@@ -16,18 +16,18 @@ export interface BookingInterface {
 }
 
 const bookingSchema = new Schema({
-    photo: String,
-    name: String,
-    id: Number,
-    orderDate: String,
-    orderTime: String,
-    checkInDate: String,
-    checkInTime: String,
-    checkOut: String,
-    checkOutTime: String,
-    notes: String,
-    room: String,
-    status: String
+    photo: {type: String, required: true},
+    name: {type: String, required: true},
+    id: {type: Number, required: true},
+    orderDate: {type: String, required: true},
+    orderTime: {type: String, required: true},
+    checkInDate: {type: String, required: true},
+    checkInTime: {type: String, required: true},
+    checkOut: {type: String, required: true},
+    checkOutTime: {type: String, required: true},
+    notes: {type: String, required: true},
+    room: {type: String, required: true},
+    status: {type: String, required: true}
 })
 
 export const BookingModel = model<BookingInterface>('Booking', bookingSchema);

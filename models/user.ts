@@ -12,14 +12,14 @@ export interface UserInterface {
 }
 
 const userSchema = new Schema({
-    photo: String,
-    id: Number,
-    name: String,
-    date: String,
-    email: String,
-    phone: String,
-    description: String,
-    status: String
+    photo: {type: String, required: true},
+    id: {type: Number, required: true},
+    name: {type: String, required: true},
+    date: {type: String, required: true},
+    email: {type: String, required: true},
+    phone: {type: String, required: true},
+    description: {type: String, required: true},
+    status: {type: String, required: true}
 })
 
 export const UserModel = model<UserInterface>('User', userSchema);

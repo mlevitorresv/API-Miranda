@@ -14,16 +14,16 @@ export interface RoomInterface {
 }
 
 const roomSchema = new Schema({
-    photo: String,
-    id: Number,
-    type: String,
-    bed: String,
-    amenities: String,
-    description: String,
-    rate: Number,
-    price: Number,
-    discount: Number,
-    available: Boolean
+    photo: {type: String, required: true},
+    id: {type: Number, required: true},
+    type: {type: String, required: true},
+    bed: {type: String, required: true},
+    amenities: {type: String, required: true},
+    description: {type: String, required: true},
+    rate: {type: Number, required: true},
+    price: {type: Number, required: true},
+    discount: {type: Number, required: true},
+    available: {type: Boolean, required: true}
 })
 
 export const RoomModel = model<RoomInterface>('Room', roomSchema);
