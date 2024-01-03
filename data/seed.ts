@@ -15,8 +15,8 @@ const createRandomRoom = () => {
     const room = new RoomModel({
         photo: faker.image.urlPicsumPhotos().toString(),
         id: faker.number.int(),
-        type: faker.helpers.arrayElement(["Single Bed", "Double bed", "Suite"]),
-        bed: faker.string.alpha(),
+        type: faker.string.alpha(),
+        bed: faker.helpers.arrayElement(["Single Bed", "Double bed", "Suite"]),
         amenities: faker.string.alpha(),
         description: faker.string.alpha(),
         rate: faker.number.float(),
@@ -36,7 +36,7 @@ const createRandomUser = () => {
         email: faker.internet.email().toString(),
         phone: faker.phone.number().toString(),
         description: faker.string.alpha(),
-        status: faker.helpers.arrayElement(["active", "inactive"])
+        status: faker.helpers.arrayElement(["ACTIVE", "INACTIVE"])
     })
     postUser(user);
 }
@@ -52,6 +52,7 @@ const createRandomContact = () => {
         date: faker.date.recent().toLocaleDateString(),
         dateTime: faker.date.recent().toLocaleTimeString(),
         archived: faker.datatype.boolean()
+
     })
     postContact(contact);
 }

@@ -13,7 +13,7 @@ export interface UserInterface {
 
 const userSchema = new Schema({
     photo: {type: String, required: true},
-    id: {type: Number, required: true},
+    id: {type: Number},
     name: {type: String, required: true},
     date: {type: String, required: true},
     email: {type: String, required: true},

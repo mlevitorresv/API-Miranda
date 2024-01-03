@@ -23,6 +23,7 @@ export const postUser = (user: UserInterface) => {
     try{
         const data = new UserModel({
             photo: user.photo,
+            id: user.id,
             name: user.name,
             date: user.date,
             email: user.email,
