@@ -1,27 +1,43 @@
 import { ContactInterface, ContactModel } from '../models/contact';
 
 export const fetchAllContacts = async (): Promise<ContactInterface[]> => {
-    return await ContactModel.find();
+    try{
+        return await ContactModel.find();
+    }catch(error){
+        console.error('Error, contacts were not obtained: ', error)
+        throw error;
+    }
 }
 
 export const fetchContactById = async (id: number): Promise<ContactInterface | null> => {
-    return await ContactModel.findOne({id: id});
+    try{
+        return await ContactModel.findOne({id: id});
+    }catch(error){
+        console.error('Error, contact were not obtained: ', error)
+        throw error;
+    }
 }
 
 export const postContact = (contact: ContactInterface) => {
-    const data = new ContactModel({
-        photo: contact.photo,
-        id: contact.id,
-        name: contact.name,
-        email: contact.email,
-        phone: contact.phone,
-        comment: contact.comment,
-        date: contact.date,
-        dateTime: contact.dateTime,
-        archived: contact.archived
-    })
-    data.save();
-    return { success: true, contact: data }
+    try{
+        const data = new ContactModel({
+            photo: contact.photo,
+            id: contact.id,
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone,
+            comment: contact.comment,
+            date: contact.date,
+            dateTime: contact.dateTime,
+            archived: contact.archived
+        })
+        data.save();
+        return { success: true, contact: data }
+    }catch(error){
+        console.error('Error, contact not saved: ', error)
+        throw error;
+    }
+    
 }
 
 export const putContact = () => {
@@ -33,6 +49,11 @@ export const patchContact = (contact: ContactInterface) => {
 }
 
 export const deleteContact = async(id: string) => {
-    await ContactModel.findOneAndDelete({id: id})
-    return { success: true }
+    try {
+        await ContactModel.findOneAndDelete({id: id})
+        return { success: true }
+    } catch (error) {
+        console.error('Error, booking not deleted: ', error)
+        throw error;
+    }
 }

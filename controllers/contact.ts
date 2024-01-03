@@ -5,29 +5,59 @@ import { ContactInterface } from '../models/contact';
 export const contactRouter = express.Router();
 
 contactRouter.get('/', async (req: Request, res: Response) => {
-    const allContacts: ContactInterface[] = await fetchAllContacts();
-    res.json({ contacts: allContacts })
+    try {
+        const allContacts: ContactInterface[] = await fetchAllContacts();
+        res.json({ contacts: allContacts })
+    } catch (error) {
+        console.error('Error getting the contacts: ', error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
 })
 
 contactRouter.get('/:id', async (req: Request, res: Response) => {
-    const id: string = req.params.id;
-    const contact: ContactInterface | null = await fetchContactById(parseInt(id))
-    res.json({ contact: contact })
+    try {
+        const id: string = req.params.id;
+        const contact: ContactInterface | null = await fetchContactById(parseInt(id))
+        res.json({ contact: contact })
+    } catch (error) {
+        console.error('Error getting the contact: ', error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
 })
 
 contactRouter.post('/', (req: Request, res: Response) => {
-    res.json(postContact(req.body))
+    try {
+        res.json(postContact(req.body))
+    } catch (error) {
+        console.error('Error saving the contact: ', error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
 })
 
 contactRouter.put('/:id', (req: Request, res: Response) => {
-    res.json(putContact())
+    try {
+        res.json(putContact())
+    } catch (error) {
+        console.error('Error updating the contact: ', error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
 })
 
 contactRouter.patch('/:id', (req: Request, res: Response) => {
-    res.json(patchContact(req.body))
+    try {
+        res.json(patchContact(req.body))
+    } catch (error) {
+        console.error('Error updating the contact: ', error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
 })
 
 contactRouter.delete('/:id', (req: Request, res: Response) => {
-    const id: string = req.params.id;
-    res.json(deleteContact(id))
+    try {
+        const id: string = req.params.id;
+        res.json(deleteContact(id))
+    } catch (error) {
+        console.error('Error deleting the contact: ', error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
 })
