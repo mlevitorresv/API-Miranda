@@ -9,7 +9,7 @@ package:
     - "dist/**"
 provider:
   name: aws
-  region: eu-west-3
+  region: eu-north-1
   runtime: nodejs18.x
 functions:
   app:
