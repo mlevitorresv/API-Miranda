@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "mongoose": "^8.0.3"
+    "mongoose": "^8.0.3",
+    "serverless-http": "^3.2.0"
   },
   "jest": {
     "testEnvironment": "node",
