@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { deleteUser, fetchAllUsers, fetchUserById, patchUser, postUser, putUser } from '../services/user';
+import { deleteUser, fetchAllUsers, fetchUserById, postUser, putUser } from '../services/user';
 import { UserInterface } from '../models/user';
 
 
@@ -37,21 +37,13 @@ userRouter.post('/', (req: Request, res: Response) => {
 
 userRouter.put('/:id', (req: Request, res: Response) => {
     try {
-        res.json(putUser())
+        res.json(putUser(req.body))
     } catch (error) {
         console.error('Error updating the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })
     }
 })
 
-userRouter.patch('/:id', (req: Request, res: Response) => {
-    try {
-        res.json(patchUser(req.body))
-    } catch (error) {
-        console.error('Error updating the booking: ', error)
-        res.status(500).json({ error: 'Internal server error' })
-    }
-})
 
 userRouter.delete('/:id', (req: Request, res: Response) => {
     try {

@@ -40,12 +40,13 @@ export const postRoom = (room: RoomInterface) => {
     }
 }
 
-export const putRoom = () => {
-    return { success: true }
-}
-
-export const patchRoom = (room: RoomInterface) => {
-    return { success: true, room: room }
+export const putRoom = async (body: RoomInterface, ) => {
+    try {
+        return await RoomModel.findOneAndUpdate({id: body.id}, body)
+    } catch (error) {
+        console.error('Error, room not updated: ', error)
+        throw error;
+    }
 }
 
 export const deleteRoom = async(id: string) => {

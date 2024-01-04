@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { deleteRoom, fetchAllRooms, fetchRoomById, patchRoom, postRoom, putRoom } from '../services/room';
+import { deleteRoom, fetchAllRooms, fetchRoomById, postRoom, putRoom } from '../services/room';
 import { RoomInterface } from '../models/room';
 
 export const roomRouter = express.Router();
@@ -36,21 +36,13 @@ roomRouter.post('/', (req: Request, res: Response) => {
 
 roomRouter.put('/:id', (req: Request, res: Response) => {
     try {
-        res.json(putRoom())
+        res.json(putRoom(req.body))
     } catch (error) {
         console.error('Error updating the room: ', error)
         res.status(500).json({ error: 'Internal server error' })
     }
 })
 
-roomRouter.patch('/:id', (req: Request, res: Response) => {
-    try {
-        res.json(patchRoom(req.body))
-    } catch (error) {
-        console.error('Error updating the room: ', error)
-        res.status(500).json({ error: 'Internal server error' })
-    }
-})
 
 roomRouter.delete('/:id', (req: Request, res: Response) => {
     try {

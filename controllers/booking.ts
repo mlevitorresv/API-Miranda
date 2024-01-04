@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { deleteBooking, fetchAllBookings, fetchBookingById, patchBooking, postBooking, putBooking } from '../services/booking';
+import { deleteBooking, fetchAllBookings, fetchBookingById, postBooking, putBooking } from '../services/booking';
 import { BookingInterface } from '../models/booking';
 
 export const bookingRouter = express.Router();
@@ -36,16 +36,7 @@ bookingRouter.post('/', (req: Request, res: Response) => {
 
 bookingRouter.put('/:id', (req: Request, res: Response) => {
     try {
-        res.json(putBooking())
-    } catch (error) {
-        console.error('Error updating the booking: ', error)
-        res.status(500).json({ error: 'Internal server error' })
-    }
-})
-
-bookingRouter.patch('/:id', (req: Request, res: Response) => {
-    try {
-        res.json(patchBooking(req.body))
+        res.json(putBooking(req.body))
     } catch (error) {
         console.error('Error updating the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })

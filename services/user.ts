@@ -39,13 +39,13 @@ export const postUser = (user: UserInterface) => {
     }
 }
 
-export const putUser = () => {
-    return { success: true }
-}
-
-export const patchUser = (user: UserInterface) => {
-    return { success: true, user: user }
-}
+export const putUser = async (body: UserInterface) => {
+    try {
+        return await UserModel.findOneAndUpdate({id: body.id}, body)
+    } catch (error) {
+        console.error('Error, user not updated: ', error)
+        throw error;
+    }}
 
 export const deleteUser = async(id: string) => {
     try {

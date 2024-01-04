@@ -44,13 +44,13 @@ export const postBooking = async(booking: BookingInterface) => {
     
 }
 
-export const putBooking = () => {
-    return { success: true }
-}
-
-export const patchBooking = (booking: BookingInterface) => {
-    return { success: true, booking: booking }
-}
+export const putBooking = async (body: BookingInterface) => {
+    try {
+        return await BookingModel.findOneAndUpdate({id: body.id}, body)
+    } catch (error) {
+        console.error('Error, booking not updated: ', error)
+        throw error;
+    }}
 
 export const deleteBooking = async (id: string) => {
     try {

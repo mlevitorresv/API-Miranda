@@ -40,12 +40,13 @@ export const postContact = (contact: ContactInterface) => {
     
 }
 
-export const putContact = () => {
-    return { success: true }
-}
-
-export const patchContact = (contact: ContactInterface) => {
-    return { success: true, contact: contact }
+export const putContact = async (body: ContactInterface) => {
+    try {
+        return await ContactModel.findOneAndUpdate({id: body.id}, body)
+    } catch (error) {
+        console.error('Error, contact not updated: ', error)
+        throw error;
+    }
 }
 
 export const deleteContact = async(id: string) => {

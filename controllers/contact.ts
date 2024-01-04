@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { deleteContact, fetchAllContacts, fetchContactById, patchContact, postContact, putContact } from '../services/contact';
+import { deleteContact, fetchAllContacts, fetchContactById, postContact, putContact } from '../services/contact';
 import { ContactInterface } from '../models/contact';
 
 export const contactRouter = express.Router();
@@ -36,16 +36,7 @@ contactRouter.post('/', (req: Request, res: Response) => {
 
 contactRouter.put('/:id', (req: Request, res: Response) => {
     try {
-        res.json(putContact())
-    } catch (error) {
-        console.error('Error updating the contact: ', error)
-        res.status(500).json({ error: 'Internal server error' })
-    }
-})
-
-contactRouter.patch('/:id', (req: Request, res: Response) => {
-    try {
-        res.json(patchContact(req.body))
+        res.json(putContact(req.body))
     } catch (error) {
         console.error('Error updating the contact: ', error)
         res.status(500).json({ error: 'Internal server error' })
