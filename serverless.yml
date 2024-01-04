@@ -1,4 +1,5 @@
 service: miranda-backend
+plugins: serverless-dotenv-plugin
 frameworkVersion: "3"
 package:
   patterns:
@@ -8,10 +9,7 @@ package:
     - "dist/**"
 provider:
   name: aws
-  region: eu-west-1
-  environment:
-    SECRET: ${file(.env.json):SECRET}
-    MONGO_URL: ${file(.env.json):MONGO_URL}
+  region: eu-west-3
   runtime: nodejs18.x
 functions:
   app:
