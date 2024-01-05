@@ -25,18 +25,20 @@ roomRouter.get('/:id', async (req: Request, res: Response) => {
     }
 })
 
-roomRouter.post('/', (req: Request, res: Response) => {
+roomRouter.post('/', async (req: Request, res: Response) => {
     try {
-        res.json(postRoom(req.body))
+        const result = await postRoom(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error saving the room: ', error)
         res.status(500).json({ error: 'Internal server error' })
     }
 })
 
-roomRouter.put('/:id', (req: Request, res: Response) => {
+roomRouter.put('/:id', async (req: Request, res: Response) => {
     try {
-        res.json(putRoom(req.body))
+        const result = await putRoom(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error updating the room: ', error)
         res.status(500).json({ error: 'Internal server error' })
@@ -44,10 +46,11 @@ roomRouter.put('/:id', (req: Request, res: Response) => {
 })
 
 
-roomRouter.delete('/:id', (req: Request, res: Response) => {
+roomRouter.delete('/:id', async (req: Request, res: Response) => {
     try {
         const id: string = req.params.id;
-        res.json(deleteRoom(id))
+        const result = await deleteRoom(id)
+        res.json(result)
     } catch (error) {
         console.error('Error deleting the room: ', error)
         res.status(500).json({ error: 'Internal server error' })

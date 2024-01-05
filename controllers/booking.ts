@@ -25,28 +25,31 @@ bookingRouter.get('/:id', async (req: Request, res: Response) => {
     }
 })
 
-bookingRouter.post('/', (req: Request, res: Response) => {
+bookingRouter.post('/', async (req: Request, res: Response) => {
     try {
-        res.json(postBooking(req.body))
+        const result = await postBooking(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error saving the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })
     }
 })
 
-bookingRouter.put('/:id', (req: Request, res: Response) => {
+bookingRouter.put('/:id', async (req: Request, res: Response) => {
     try {
-        res.json(putBooking(req.body))
+        const result = await putBooking(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error updating the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })
     }
 })
 
-bookingRouter.delete('/:id', (req: Request, res: Response) => {
+bookingRouter.delete('/:id', async (req: Request, res: Response) => {
     try {
         const id: string = req.params.id;
-        res.json(deleteBooking(id))
+        const result = await deleteBooking(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error deleting the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })

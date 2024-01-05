@@ -26,18 +26,20 @@ userRouter.get('/:id', async(req: Request, res: Response) => {
     }
 })
 
-userRouter.post('/', (req: Request, res: Response) => {
+userRouter.post('/', async (req: Request, res: Response) => {
     try {
-        res.json(postUser(req.body))
+        const result = await postUser(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error saving the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })
     }
 })
 
-userRouter.put('/:id', (req: Request, res: Response) => {
+userRouter.put('/:id', async (req: Request, res: Response) => {
     try {
-        res.json(putUser(req.body))
+        const result = await putUser(req.body)
+        res.json(result)
     } catch (error) {
         console.error('Error updating the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })
@@ -45,10 +47,11 @@ userRouter.put('/:id', (req: Request, res: Response) => {
 })
 
 
-userRouter.delete('/:id', (req: Request, res: Response) => {
+userRouter.delete('/:id', async (req: Request, res: Response) => {
     try {
         const id: string = req.params.id;
-        res.json(deleteUser(id))
+        const result = await deleteUser(id);
+        res.json(result)
     } catch (error) {
         console.error('Error deleting the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })
