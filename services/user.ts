@@ -19,7 +19,7 @@ export const fetchUserById = async (id: number): Promise<UserInterface | null> =
     }
 }
 
-export const postUser = (user: UserInterface) => {
+export const postUser = async (user: UserInterface) => {
     try{
         const data = new UserModel({
             photo: user.photo,
@@ -31,7 +31,7 @@ export const postUser = (user: UserInterface) => {
             description: user.description,
             status: user.status
         })
-        data.save();
+        await data.save();
         return { success: true, user: data }
     }catch (error) {
         console.error('Error, user not saved: ', error)

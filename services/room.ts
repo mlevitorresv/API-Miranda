@@ -18,7 +18,7 @@ export const fetchRoomById = async (id: number): Promise<RoomInterface | null> =
     }
 }
 
-export const postRoom = (room: RoomInterface) => {
+export const postRoom = async (room: RoomInterface) => {
     try {
         const data = new RoomModel({
             photo: room.photo,
@@ -32,7 +32,7 @@ export const postRoom = (room: RoomInterface) => {
             discount: room.discount,
             available: room.available
         })
-        data.save();
+        await data.save();
         return { success: true, room: data }
     }catch(error){
         console.error('Error, room not saved: ', error)

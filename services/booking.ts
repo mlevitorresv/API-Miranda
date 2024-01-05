@@ -35,7 +35,7 @@ export const postBooking = async(booking: BookingInterface) => {
             room: booking.room,
             status: booking.status
         })
-        data.save();
+        await data.save();
         return { success: true, booking: data }
     } catch (error) {
         console.error('Error, booking not saved: ', error)

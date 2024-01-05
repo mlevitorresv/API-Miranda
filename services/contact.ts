@@ -18,7 +18,7 @@ export const fetchContactById = async (id: number): Promise<ContactInterface | n
     }
 }
 
-export const postContact = (contact: ContactInterface) => {
+export const postContact = async (contact: ContactInterface) => {
     try{
         const data = new ContactModel({
             photo: contact.photo,
@@ -31,7 +31,7 @@ export const postContact = (contact: ContactInterface) => {
             dateTime: contact.dateTime,
             archived: contact.archived
         })
-        data.save();
+        await data.save();
         return { success: true, contact: data }
     }catch(error){
         console.error('Error, contact not saved: ', error)
