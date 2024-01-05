@@ -4,14 +4,9 @@ import { mongoConnect } from '../config/mongo'
 import { UserModel } from '../models/user';
 import { ContactModel } from '../models/contact';
 import { BookingModel } from '../models/booking';
-import { postRoom } from '../services/room';
-import { postUser } from '../services/user';
-import { postContact } from '../services/contact';
-import { postBooking } from '../services/booking';
 
-mongoConnect();
 
-const createRandomRoom = () => {
+const createRandomRoom = async () => {
     const room = new RoomModel({
         photo: faker.image.urlPicsumPhotos().toString(),
         id: faker.number.int(),
@@ -24,10 +19,10 @@ const createRandomRoom = () => {
         discount: faker.number.int(),
         available: faker.datatype.boolean()
     })
-    postRoom(room);
+    await room.save()
 }
 
-const createRandomUser = () => {
+const createRandomUser = async () => {
     const user = new UserModel({
         photo: faker.image.urlPicsumPhotos().toString(),
         id: faker.number.int(),
@@ -38,10 +33,10 @@ const createRandomUser = () => {
         description: faker.string.alpha(),
         status: faker.helpers.arrayElement(["ACTIVE", "INACTIVE"])
     })
-    postUser(user);
+    await user.save();
 }
 
-const createRandomContact = () => {
+const createRandomContact = async () => {
     const contact = new ContactModel({
         photo: faker.image.urlPicsumPhotos().toString(),
         id: faker.number.int(),
@@ -54,10 +49,15 @@ const createRandomContact = () => {
         archived: faker.datatype.boolean()
 
     })
-    postContact(contact);
+    await contact.save()
 }
 
-const createRandomBooking = () => {
+const createRandomBooking = async () => {
+    const rooms = await RoomModel.find();
+    const random = Math.floor(Math.random() * rooms.length)
+
+    const roomId = rooms[random].id;
+
     const booking = new BookingModel({
         photo: faker.image.urlPicsumPhotos().toString(),
         name: faker.person.fullName().toString(),
@@ -69,20 +69,22 @@ const createRandomBooking = () => {
         checkOut: faker.date.future().toLocaleDateString(),
         checkOutTime: faker.date.future().toLocaleTimeString(),
         notes: faker.lorem.paragraph(1).toString(),
-        room: faker.number.int().toString(),
+        room: roomId,
         status: faker.helpers.arrayElement(["pending", "booked", "refund"])
     })
-    postBooking(booking);
+    console.log(booking)
+    await booking.save();
 }
 
 
 
 const run = async () => {
+    mongoConnect();
     for (let i = 0; i < 10; i++) {
-        createRandomRoom();
-        createRandomUser();
-        createRandomContact();
-        createRandomBooking();        
+        await createRandomRoom();
+        await createRandomUser();
+        await createRandomContact();
+        await createRandomBooking();        
     }
 };
 
