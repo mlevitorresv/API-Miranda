@@ -31,7 +31,7 @@ const fetchUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.fetchUserById = fetchUserById;
-const postUser = (user) => {
+const postUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = new user_1.UserModel({
             photo: user.photo,
@@ -43,14 +43,14 @@ const postUser = (user) => {
             description: user.description,
             status: user.status
         });
-        data.save();
+        yield data.save();
         return { success: true, user: data };
     }
     catch (error) {
         console.error('Error, user not saved: ', error);
         throw error;
     }
-};
+});
 exports.postUser = postUser;
 const putUser = (body) => __awaiter(void 0, void 0, void 0, function* () {
     try {

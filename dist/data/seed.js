@@ -15,12 +15,7 @@ const mongo_1 = require("../config/mongo");
 const user_1 = require("../models/user");
 const contact_1 = require("../models/contact");
 const booking_1 = require("../models/booking");
-const room_2 = require("../services/room");
-const user_2 = require("../services/user");
-const contact_2 = require("../services/contact");
-const booking_2 = require("../services/booking");
-(0, mongo_1.mongoConnect)();
-const createRandomRoom = () => {
+const createRandomRoom = () => __awaiter(void 0, void 0, void 0, function* () {
     const room = new room_1.RoomModel({
         photo: faker_1.faker.image.urlPicsumPhotos().toString(),
         id: faker_1.faker.number.int(),
@@ -33,9 +28,9 @@ const createRandomRoom = () => {
         discount: faker_1.faker.number.int(),
         available: faker_1.faker.datatype.boolean()
     });
-    (0, room_2.postRoom)(room);
-};
-const createRandomUser = () => {
+    yield room.save();
+});
+const createRandomUser = () => __awaiter(void 0, void 0, void 0, function* () {
     const user = new user_1.UserModel({
         photo: faker_1.faker.image.urlPicsumPhotos().toString(),
         id: faker_1.faker.number.int(),
@@ -46,9 +41,9 @@ const createRandomUser = () => {
         description: faker_1.faker.string.alpha(),
         status: faker_1.faker.helpers.arrayElement(["ACTIVE", "INACTIVE"])
     });
-    (0, user_2.postUser)(user);
-};
-const createRandomContact = () => {
+    yield user.save();
+});
+const createRandomContact = () => __awaiter(void 0, void 0, void 0, function* () {
     const contact = new contact_1.ContactModel({
         photo: faker_1.faker.image.urlPicsumPhotos().toString(),
         id: faker_1.faker.number.int(),
@@ -60,9 +55,12 @@ const createRandomContact = () => {
         dateTime: faker_1.faker.date.recent().toLocaleTimeString(),
         archived: faker_1.faker.datatype.boolean()
     });
-    (0, contact_2.postContact)(contact);
-};
-const createRandomBooking = () => {
+    yield contact.save();
+});
+const createRandomBooking = () => __awaiter(void 0, void 0, void 0, function* () {
+    const rooms = yield room_1.RoomModel.find();
+    const random = Math.floor(Math.random() * rooms.length);
+    const roomId = rooms[random].id;
     const booking = new booking_1.BookingModel({
         photo: faker_1.faker.image.urlPicsumPhotos().toString(),
         name: faker_1.faker.person.fullName().toString(),
@@ -74,17 +72,19 @@ const createRandomBooking = () => {
         checkOut: faker_1.faker.date.future().toLocaleDateString(),
         checkOutTime: faker_1.faker.date.future().toLocaleTimeString(),
         notes: faker_1.faker.lorem.paragraph(1).toString(),
-        room: faker_1.faker.number.int().toString(),
+        room: roomId,
         status: faker_1.faker.helpers.arrayElement(["pending", "booked", "refund"])
     });
-    (0, booking_2.postBooking)(booking);
-};
+    console.log(booking);
+    yield booking.save();
+});
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
+    (0, mongo_1.mongoConnect)();
     for (let i = 0; i < 10; i++) {
-        createRandomRoom();
-        createRandomUser();
-        createRandomContact();
-        createRandomBooking();
+        yield createRandomRoom();
+        yield createRandomUser();
+        yield createRandomContact();
+        yield createRandomBooking();
     }
 });
 run();

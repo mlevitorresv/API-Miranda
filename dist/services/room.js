@@ -31,7 +31,7 @@ const fetchRoomById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.fetchRoomById = fetchRoomById;
-const postRoom = (room) => {
+const postRoom = (room) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = new room_1.RoomModel({
             photo: room.photo,
@@ -45,14 +45,14 @@ const postRoom = (room) => {
             discount: room.discount,
             available: room.available
         });
-        data.save();
+        yield data.save();
         return { success: true, room: data };
     }
     catch (error) {
         console.error('Error, room not saved: ', error);
         throw error;
     }
-};
+});
 exports.postRoom = postRoom;
 const putRoom = (body) => __awaiter(void 0, void 0, void 0, function* () {
     try {

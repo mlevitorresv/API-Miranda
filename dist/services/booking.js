@@ -47,7 +47,7 @@ const postBooking = (booking) => __awaiter(void 0, void 0, void 0, function* () 
             room: booking.room,
             status: booking.status
         });
-        data.save();
+        yield data.save();
         return { success: true, booking: data };
     }
     catch (error) {

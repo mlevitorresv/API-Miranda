@@ -37,31 +37,34 @@ exports.roomRouter.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, f
         res.status(500).json({ error: 'Internal server error' });
     }
 }));
-exports.roomRouter.post('/', (req, res) => {
+exports.roomRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.json((0, room_1.postRoom)(req.body));
+        const result = yield (0, room_1.postRoom)(req.body);
+        res.json(result);
     }
     catch (error) {
         console.error('Error saving the room: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
-exports.roomRouter.put('/:id', (req, res) => {
+}));
+exports.roomRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.json((0, room_1.putRoom)(req.body));
+        const result = yield (0, room_1.putRoom)(req.body);
+        res.json(result);
     }
     catch (error) {
         console.error('Error updating the room: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
-exports.roomRouter.delete('/:id', (req, res) => {
+}));
+exports.roomRouter.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        res.json((0, room_1.deleteRoom)(id));
+        const result = yield (0, room_1.deleteRoom)(id);
+        res.json(result);
     }
     catch (error) {
         console.error('Error deleting the room: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
+}));

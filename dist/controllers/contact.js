@@ -37,31 +37,34 @@ exports.contactRouter.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0
         res.status(500).json({ error: 'Internal server error' });
     }
 }));
-exports.contactRouter.post('/', (req, res) => {
+exports.contactRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.json((0, contact_1.postContact)(req.body));
+        const result = yield (0, contact_1.postContact)(req.body);
+        res.json(result);
     }
     catch (error) {
         console.error('Error saving the contact: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
-exports.contactRouter.put('/:id', (req, res) => {
+}));
+exports.contactRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.json((0, contact_1.putContact)(req.body));
+        const result = yield (0, contact_1.putContact)(req.body);
+        res.json(result);
     }
     catch (error) {
         console.error('Error updating the contact: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
-exports.contactRouter.delete('/:id', (req, res) => {
+}));
+exports.contactRouter.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        res.json((0, contact_1.deleteContact)(id));
+        const result = yield (0, contact_1.deleteContact)(id);
+        res.json(result);
     }
     catch (error) {
         console.error('Error deleting the contact: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
+}));

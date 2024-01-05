@@ -37,31 +37,34 @@ exports.userRouter.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, f
         res.status(500).json({ error: 'Internal server error' });
     }
 }));
-exports.userRouter.post('/', (req, res) => {
+exports.userRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.json((0, user_1.postUser)(req.body));
+        const result = yield (0, user_1.postUser)(req.body);
+        res.json(result);
     }
     catch (error) {
         console.error('Error saving the booking: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
-exports.userRouter.put('/:id', (req, res) => {
+}));
+exports.userRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.json((0, user_1.putUser)(req.body));
+        const result = yield (0, user_1.putUser)(req.body);
+        res.json(result);
     }
     catch (error) {
         console.error('Error updating the booking: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
-exports.userRouter.delete('/:id', (req, res) => {
+}));
+exports.userRouter.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        res.json((0, user_1.deleteUser)(id));
+        const result = yield (0, user_1.deleteUser)(id);
+        res.json(result);
     }
     catch (error) {
         console.error('Error deleting the booking: ', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
+}));

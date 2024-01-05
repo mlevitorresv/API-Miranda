@@ -31,7 +31,7 @@ const fetchContactById = (id) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.fetchContactById = fetchContactById;
-const postContact = (contact) => {
+const postContact = (contact) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = new contact_1.ContactModel({
             photo: contact.photo,
@@ -44,14 +44,14 @@ const postContact = (contact) => {
             dateTime: contact.dateTime,
             archived: contact.archived
         });
-        data.save();
+        yield data.save();
         return { success: true, contact: data };
     }
     catch (error) {
         console.error('Error, contact not saved: ', error);
         throw error;
     }
-};
+});
 exports.postContact = postContact;
 const putContact = (body) => __awaiter(void 0, void 0, void 0, function* () {
     try {
