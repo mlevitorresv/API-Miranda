@@ -2,7 +2,6 @@ import { Schema, model } from "mongoose"
 
 export interface RoomInterface {
     photo: string,
-    id: number,
     type: string,
     bed: string,
     amenities: string,
@@ -15,7 +14,6 @@ export interface RoomInterface {
 
 const roomSchema = new Schema({
     photo: {type: String, required: true},
-    id: {type: Number, required: true},
     type: {type: String, required: true},
     bed: {type: String, required: true},
     amenities: {type: String, required: true},

@@ -17,7 +17,7 @@ roomRouter.get('/', async (req: Request, res: Response) => {
 roomRouter.get('/:id', async (req: Request, res: Response) => {
     try {
         const id: string = req.params.id;
-        const room: RoomInterface | null = await fetchRoomById(parseInt(id));
+        const room: RoomInterface | null = await fetchRoomById(id);
         res.json({ room: room })
     } catch (error) {
         console.error('Error getting the rooom: ', error)
@@ -37,7 +37,8 @@ roomRouter.post('/', async (req: Request, res: Response) => {
 
 roomRouter.put('/:id', async (req: Request, res: Response) => {
     try {
-        const result = await putRoom(req.body);
+        const id: string = req.params.id;
+        const result = await putRoom(id, req.body);
         res.json(result)
     } catch (error) {
         console.error('Error updating the room: ', error)

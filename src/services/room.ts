@@ -9,9 +9,9 @@ export const fetchAllRooms = async (): Promise<RoomInterface[]> => {
     }
 }
 
-export const fetchRoomById = async (id: number): Promise<RoomInterface | null> => {
+export const fetchRoomById = async (id: string): Promise<RoomInterface | null> => {
     try{
-        return await RoomModel.findOne({id: id});
+        return await RoomModel.findById(id);
     }catch(error){
         console.error('Error, room were not obtained: ', error)
         throw error;
@@ -22,7 +22,6 @@ export const postRoom = async (room: RoomInterface) => {
     try {
         const data = new RoomModel({
             photo: room.photo,
-            id: room.id,
             type: room.type,
             bed: room.bed,
             amenities: room.amenities,
@@ -40,9 +39,9 @@ export const postRoom = async (room: RoomInterface) => {
     }
 }
 
-export const putRoom = async (body: RoomInterface, ) => {
+export const putRoom = async (id: string, body: RoomInterface, ) => {
     try {
-        return await RoomModel.findOneAndUpdate({id: body.id}, body)
+        return await RoomModel.findByIdAndUpdate(id, body)
     } catch (error) {
         console.error('Error, room not updated: ', error)
         throw error;
@@ -51,7 +50,7 @@ export const putRoom = async (body: RoomInterface, ) => {
 
 export const deleteRoom = async(id: string) => {
     try {
-        await RoomModel.findOneAndDelete({id: id})
+        await RoomModel.findByIdAndDelete(id)
         return { success: true }
     } catch (error) {
         console.error('Error, room not deleted: ', error)
