@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import { roomRouter } from './controllers/room'
 import { userRouter } from './controllers/user'
 import { contactRouter } from './controllers/contact'
@@ -7,10 +8,20 @@ import { authMiddleware } from './middleware/auth'
 import { publicRouter } from './public/public'
 import { loginRouter } from './controllers/login'
 import { mongoConnect } from './config/mongo'
+
+
 export const app = express()
+const corsOptions = {
+    "origin": "http://localhost:3000",
+    "credentials" : true,
+    "methods": "GET,PUT,PATCH,POST,DELETE",
+    "allowedHeaders": "Authorization",
+  }
+
 
 mongoConnect();
 
+app.use(cors(corsOptions))
 app.use(express.json())
 
 app.use('/login', loginRouter)
