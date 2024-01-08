@@ -18,7 +18,7 @@ userRouter.get('/', async (req: Request, res: Response) => {
 userRouter.get('/:id', async(req: Request, res: Response) => {
     try {
         const id: string = req.params.id;
-        const user: UserInterface | null = await fetchUserById(parseInt(id));
+        const user: UserInterface | null = await fetchUserById(id);
         res.json({ user: user })
     } catch (error) {
         console.error('Error getting the booking: ', error)
@@ -38,7 +38,8 @@ userRouter.post('/', async (req: Request, res: Response) => {
 
 userRouter.put('/:id', async (req: Request, res: Response) => {
     try {
-        const result = await putUser(req.body)
+        const id = req.params.id;
+        const result = await putUser(id, req.body)
         res.json(result)
     } catch (error) {
         console.error('Error updating the booking: ', error)
