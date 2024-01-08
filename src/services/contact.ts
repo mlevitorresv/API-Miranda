@@ -9,9 +9,9 @@ export const fetchAllContacts = async (): Promise<ContactInterface[]> => {
     }
 }
 
-export const fetchContactById = async (id: number): Promise<ContactInterface | null> => {
+export const fetchContactById = async (id: string): Promise<ContactInterface | null> => {
     try{
-        return await ContactModel.findOne({id: id});
+        return await ContactModel.findById(id);
     }catch(error){
         console.error('Error, contact were not obtained: ', error)
         throw error;
@@ -22,7 +22,6 @@ export const postContact = async (contact: ContactInterface) => {
     try{
         const data = new ContactModel({
             photo: contact.photo,
-            id: contact.id,
             name: contact.name,
             email: contact.email,
             phone: contact.phone,
@@ -40,9 +39,9 @@ export const postContact = async (contact: ContactInterface) => {
     
 }
 
-export const putContact = async (body: ContactInterface) => {
+export const putContact = async (id: string, body: ContactInterface) => {
     try {
-        return await ContactModel.findOneAndUpdate({id: body.id}, body)
+        return await ContactModel.findByIdAndUpdate(id, body)
     } catch (error) {
         console.error('Error, contact not updated: ', error)
         throw error;
@@ -51,7 +50,7 @@ export const putContact = async (body: ContactInterface) => {
 
 export const deleteContact = async(id: string) => {
     try {
-        await ContactModel.findOneAndDelete({id: id})
+        await ContactModel.findByIdAndDelete(id)
         return { success: true }
     } catch (error) {
         console.error('Error, booking not deleted: ', error)

@@ -2,7 +2,6 @@ import { Schema, model } from "mongoose"
 
 export interface ContactInterface {
     photo: string
-    id: number
     name: string
     email: string
     phone: string
@@ -15,7 +14,6 @@ export interface ContactInterface {
 
 const contactSchema = new Schema({
     photo: {type: String, required: true},
-    id: {type: Number, required: true},
     name: {type: String, required: true},
     email: {type: String, required: true},
     phone: {type: String, required: true},

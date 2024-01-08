@@ -17,7 +17,7 @@ contactRouter.get('/', async (req: Request, res: Response) => {
 contactRouter.get('/:id', async (req: Request, res: Response) => {
     try {
         const id: string = req.params.id;
-        const contact: ContactInterface | null = await fetchContactById(parseInt(id))
+        const contact: ContactInterface | null = await fetchContactById(id)
         res.json({ contact: contact })
     } catch (error) {
         console.error('Error getting the contact: ', error)
@@ -37,7 +37,8 @@ contactRouter.post('/', async (req: Request, res: Response) => {
 
 contactRouter.put('/:id', async (req: Request, res: Response) => {
     try {
-        const result = await putContact(req.body);
+        const id = req.params.id;
+        const result = await putContact(id, req.body);
         res.json(result)
     } catch (error) {
         console.error('Error updating the contact: ', error)
