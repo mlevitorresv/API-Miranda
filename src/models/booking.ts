@@ -3,7 +3,6 @@ import { Schema, model } from "mongoose"
 export interface BookingInterface {
     photo: string
     name: string
-    id: number
     orderDate: string
     orderTime: string
     checkInDate: string
@@ -18,7 +17,6 @@ export interface BookingInterface {
 const bookingSchema = new Schema({
     photo: {type: String, required: true},
     name: {type: String, required: true},
-    id: {type: Number, required: true},
     orderDate: {type: String, required: true},
     orderTime: {type: String, required: true},
     checkInDate: {type: String, required: true},

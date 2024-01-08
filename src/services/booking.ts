@@ -10,9 +10,9 @@ export const fetchAllBookings = async (): Promise<BookingInterface[]> => {
     }
 }
 
-export const fetchBookingById = async (id: number): Promise<BookingInterface | null> => {
+export const fetchBookingById = async (id: string): Promise<BookingInterface | null> => {
     try{
-        return await BookingModel.findOne({id: id});
+        return await BookingModel.findById(id);
     }catch(error){
         console.error('Error, booking were not obtained: ', error)
         throw error;
@@ -24,7 +24,6 @@ export const postBooking = async(booking: BookingInterface) => {
         const data = new BookingModel({
             photo: booking.photo,
             name: booking.name,
-            id: booking.id,
             orderDate: booking.orderDate,
             orderTime: booking.orderTime,
             checkInDate: booking.checkInDate,
@@ -44,9 +43,9 @@ export const postBooking = async(booking: BookingInterface) => {
     
 }
 
-export const putBooking = async (body: BookingInterface) => {
+export const putBooking = async (id: string, body: BookingInterface) => {
     try {
-        return await BookingModel.findOneAndUpdate({id: body.id}, body)
+        return await BookingModel.findByIdAndUpdate(id, body)
     } catch (error) {
         console.error('Error, booking not updated: ', error)
         throw error;
@@ -54,7 +53,7 @@ export const putBooking = async (body: BookingInterface) => {
 
 export const deleteBooking = async (id: string) => {
     try {
-        await BookingModel.findOneAndDelete({id: id})
+        await BookingModel.findByIdAndDelete(id)
         return { success: true }
     } catch (error) {
         console.error('Error, booking not deleted: ', error)

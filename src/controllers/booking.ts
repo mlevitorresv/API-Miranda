@@ -17,7 +17,7 @@ bookingRouter.get('/', async (req: Request, res: Response) => {
 bookingRouter.get('/:id', async (req: Request, res: Response) => {
     try {
         const id: string = req.params.id;
-        const booking: BookingInterface | null = await fetchBookingById(parseInt(id));
+        const booking: BookingInterface | null = await fetchBookingById(id);
         res.json({ booking: booking })
     } catch (error) {
         console.error('Error getting the booking: ', error)
@@ -37,7 +37,8 @@ bookingRouter.post('/', async (req: Request, res: Response) => {
 
 bookingRouter.put('/:id', async (req: Request, res: Response) => {
     try {
-        const result = await putBooking(req.body);
+        const id = req.params.id;
+        const result = await putBooking(id, req.body);
         res.json(result)
     } catch (error) {
         console.error('Error updating the booking: ', error)
@@ -48,7 +49,7 @@ bookingRouter.put('/:id', async (req: Request, res: Response) => {
 bookingRouter.delete('/:id', async (req: Request, res: Response) => {
     try {
         const id: string = req.params.id;
-        const result = await deleteBooking(req.body);
+        const result = await deleteBooking(id);
         res.json(result)
     } catch (error) {
         console.error('Error deleting the booking: ', error)
