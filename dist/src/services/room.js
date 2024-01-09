@@ -23,7 +23,7 @@ const fetchAllRooms = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.fetchAllRooms = fetchAllRooms;
 const fetchRoomById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield room_1.RoomModel.findOne({ id: id });
+        return yield room_1.RoomModel.findById(id);
     }
     catch (error) {
         console.error('Error, room were not obtained: ', error);
@@ -35,7 +35,6 @@ const postRoom = (room) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = new room_1.RoomModel({
             photo: room.photo,
-            id: room.id,
             type: room.type,
             bed: room.bed,
             amenities: room.amenities,
@@ -54,9 +53,9 @@ const postRoom = (room) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.postRoom = postRoom;
-const putRoom = (body) => __awaiter(void 0, void 0, void 0, function* () {
+const putRoom = (id, body) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield room_1.RoomModel.findOneAndUpdate({ id: body.id }, body);
+        return yield room_1.RoomModel.findByIdAndUpdate(id, body);
     }
     catch (error) {
         console.error('Error, room not updated: ', error);
@@ -66,7 +65,7 @@ const putRoom = (body) => __awaiter(void 0, void 0, void 0, function* () {
 exports.putRoom = putRoom;
 const deleteRoom = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield room_1.RoomModel.findOneAndDelete({ id: id });
+        yield room_1.RoomModel.findByIdAndDelete(id);
         return { success: true };
     }
     catch (error) {

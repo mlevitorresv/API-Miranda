@@ -29,7 +29,7 @@ exports.userRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, func
 exports.userRouter.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const user = yield (0, user_1.fetchUserById)(parseInt(id));
+        const user = yield (0, user_1.fetchUserById)(id);
         res.json({ user: user });
     }
     catch (error) {
@@ -49,7 +49,8 @@ exports.userRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, fun
 }));
 exports.userRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield (0, user_1.putUser)(req.body);
+        const id = req.params.id;
+        const result = yield (0, user_1.putUser)(id, req.body);
         res.json(result);
     }
     catch (error) {

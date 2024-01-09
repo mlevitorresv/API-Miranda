@@ -23,7 +23,7 @@ const fetchAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.fetchAllUsers = fetchAllUsers;
 const fetchUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield user_1.UserModel.findOne({ id: id });
+        return yield user_1.UserModel.findById(id);
     }
     catch (error) {
         console.error('Error, user were not obtained: ', error);
@@ -35,7 +35,6 @@ const postUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = new user_1.UserModel({
             photo: user.photo,
-            id: user.id,
             name: user.name,
             date: user.date,
             email: user.email,
@@ -52,9 +51,9 @@ const postUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.postUser = postUser;
-const putUser = (body) => __awaiter(void 0, void 0, void 0, function* () {
+const putUser = (id, body) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield user_1.UserModel.findOneAndUpdate({ id: body.id }, body);
+        return yield user_1.UserModel.findByIdAndUpdate(id, body);
     }
     catch (error) {
         console.error('Error, user not updated: ', error);
@@ -64,7 +63,7 @@ const putUser = (body) => __awaiter(void 0, void 0, void 0, function* () {
 exports.putUser = putUser;
 const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield user_1.UserModel.findOneAndDelete({ id: id });
+        yield user_1.UserModel.findByIdAndDelete(id);
         return { success: true };
     }
     catch (error) {

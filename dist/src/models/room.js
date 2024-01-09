@@ -4,7 +4,6 @@ exports.RoomModel = void 0;
 const mongoose_1 = require("mongoose");
 const roomSchema = new mongoose_1.Schema({
     photo: { type: String, required: true },
-    id: { type: Number, required: true },
     type: { type: String, required: true },
     bed: { type: String, required: true },
     amenities: { type: String, required: true },

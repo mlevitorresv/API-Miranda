@@ -23,7 +23,7 @@ const fetchAllBookings = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.fetchAllBookings = fetchAllBookings;
 const fetchBookingById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield booking_1.BookingModel.findOne({ id: id });
+        return yield booking_1.BookingModel.findById(id);
     }
     catch (error) {
         console.error('Error, booking were not obtained: ', error);
@@ -36,7 +36,6 @@ const postBooking = (booking) => __awaiter(void 0, void 0, void 0, function* () 
         const data = new booking_1.BookingModel({
             photo: booking.photo,
             name: booking.name,
-            id: booking.id,
             orderDate: booking.orderDate,
             orderTime: booking.orderTime,
             checkInDate: booking.checkInDate,
@@ -56,9 +55,9 @@ const postBooking = (booking) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.postBooking = postBooking;
-const putBooking = (body) => __awaiter(void 0, void 0, void 0, function* () {
+const putBooking = (id, body) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield booking_1.BookingModel.findOneAndUpdate({ id: body.id }, body);
+        return yield booking_1.BookingModel.findByIdAndUpdate(id, body);
     }
     catch (error) {
         console.error('Error, booking not updated: ', error);
@@ -68,7 +67,7 @@ const putBooking = (body) => __awaiter(void 0, void 0, void 0, function* () {
 exports.putBooking = putBooking;
 const deleteBooking = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield booking_1.BookingModel.findOneAndDelete({ id: id });
+        yield booking_1.BookingModel.findByIdAndDelete(id);
         return { success: true };
     }
     catch (error) {

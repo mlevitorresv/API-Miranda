@@ -29,7 +29,7 @@ exports.bookingRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, f
 exports.bookingRouter.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const booking = yield (0, booking_1.fetchBookingById)(parseInt(id));
+        const booking = yield (0, booking_1.fetchBookingById)(id);
         res.json({ booking: booking });
     }
     catch (error) {
@@ -49,7 +49,8 @@ exports.bookingRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, 
 }));
 exports.bookingRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield (0, booking_1.putBooking)(req.body);
+        const id = req.params.id;
+        const result = yield (0, booking_1.putBooking)(id, req.body);
         res.json(result);
     }
     catch (error) {
@@ -60,7 +61,7 @@ exports.bookingRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0
 exports.bookingRouter.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const result = yield (0, booking_1.deleteBooking)(req.body);
+        const result = yield (0, booking_1.deleteBooking)(id);
         res.json(result);
     }
     catch (error) {

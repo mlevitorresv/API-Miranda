@@ -23,7 +23,7 @@ const fetchAllContacts = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.fetchAllContacts = fetchAllContacts;
 const fetchContactById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield contact_1.ContactModel.findOne({ id: id });
+        return yield contact_1.ContactModel.findById(id);
     }
     catch (error) {
         console.error('Error, contact were not obtained: ', error);
@@ -35,7 +35,6 @@ const postContact = (contact) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const data = new contact_1.ContactModel({
             photo: contact.photo,
-            id: contact.id,
             name: contact.name,
             email: contact.email,
             phone: contact.phone,
@@ -53,9 +52,9 @@ const postContact = (contact) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.postContact = postContact;
-const putContact = (body) => __awaiter(void 0, void 0, void 0, function* () {
+const putContact = (id, body) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield contact_1.ContactModel.findOneAndUpdate({ id: body.id }, body);
+        return yield contact_1.ContactModel.findByIdAndUpdate(id, body);
     }
     catch (error) {
         console.error('Error, contact not updated: ', error);
@@ -65,7 +64,7 @@ const putContact = (body) => __awaiter(void 0, void 0, void 0, function* () {
 exports.putContact = putContact;
 const deleteContact = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield contact_1.ContactModel.findOneAndDelete({ id: id });
+        yield contact_1.ContactModel.findByIdAndDelete(id);
         return { success: true };
     }
     catch (error) {

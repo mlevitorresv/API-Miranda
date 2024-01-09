@@ -29,7 +29,7 @@ exports.roomRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, func
 exports.roomRouter.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const room = yield (0, room_1.fetchRoomById)(parseInt(id));
+        const room = yield (0, room_1.fetchRoomById)(id);
         res.json({ room: room });
     }
     catch (error) {
@@ -49,7 +49,8 @@ exports.roomRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, fun
 }));
 exports.roomRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield (0, room_1.putRoom)(req.body);
+        const id = req.params.id;
+        const result = yield (0, room_1.putRoom)(id, req.body);
         res.json(result);
     }
     catch (error) {

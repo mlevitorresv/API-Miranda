@@ -29,7 +29,7 @@ exports.contactRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, f
 exports.contactRouter.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
-        const contact = yield (0, contact_1.fetchContactById)(parseInt(id));
+        const contact = yield (0, contact_1.fetchContactById)(id);
         res.json({ contact: contact });
     }
     catch (error) {
@@ -49,7 +49,8 @@ exports.contactRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, 
 }));
 exports.contactRouter.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield (0, contact_1.putContact)(req.body);
+        const id = req.params.id;
+        const result = yield (0, contact_1.putContact)(id, req.body);
         res.json(result);
     }
     catch (error) {

@@ -4,7 +4,6 @@ exports.ContactModel = void 0;
 const mongoose_1 = require("mongoose");
 const contactSchema = new mongoose_1.Schema({
     photo: { type: String, required: true },
-    id: { type: Number, required: true },
     name: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: String, required: true },

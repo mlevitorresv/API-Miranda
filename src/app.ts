@@ -12,12 +12,11 @@ import { mongoConnect } from './config/mongo'
 
 export const app = express()
 const corsOptions = {
-    "origin": "http://localhost:3000",
+    "origin": "http://localhost:5173",
     "credentials" : true,
     "methods": "GET,PUT,PATCH,POST,DELETE",
-    "allowedHeaders": "Authorization",
+    "allowedHeaders": "Content-Type,Authorization",
   }
-
 
 mongoConnect();
 

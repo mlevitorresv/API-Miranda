@@ -5,7 +5,6 @@ const mongoose_1 = require("mongoose");
 const bookingSchema = new mongoose_1.Schema({
     photo: { type: String, required: true },
     name: { type: String, required: true },
-    id: { type: Number, required: true },
     orderDate: { type: String, required: true },
     orderTime: { type: String, required: true },
     checkInDate: { type: String, required: true },
