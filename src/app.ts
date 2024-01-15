@@ -12,15 +12,16 @@ import { mongoConnect } from './config/mongo'
 
 export const app = express()
 const corsOptions = {
-    "origin": "http://localhost:5173",
-    "credentials" : true,
-    "methods": "GET,PUT,PATCH,POST,DELETE",
-    "allowedHeaders": "Content-Type,Authorization",
-  }
+  "origin": "http://localhost:5173",
+  "credentials": true,
+  "methods": "GET,PUT,PATCH,POST,DELETE",
+  "allowedHeaders": "Content-Type,Authorization",
+}
 
-mongoConnect();
+
 
 app.use(cors(corsOptions))
+mongoConnect();
 app.use(express.json())
 
 app.use('/login', loginRouter)
