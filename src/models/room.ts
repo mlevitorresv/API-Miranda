@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import Joi from "joi"
 
 export interface RoomInterface {
     photo: string,
@@ -12,16 +12,17 @@ export interface RoomInterface {
     available: boolean
 }
 
-const roomSchema = new Schema({
-    photo: {type: String, required: true},
-    type: {type: String, required: true},
-    bed: {type: String, required: true},
-    amenities: {type: String, required: true},
-    description: {type: String, required: true},
-    rate: {type: Number, required: true},
-    price: {type: Number, required: true},
-    discount: {type: Number, required: true},
-    available: {type: Boolean, required: true}
-})
 
-export const RoomModel = model<RoomInterface>('Room', roomSchema);
+
+export const roomSchema = Joi.object({
+    id: Joi.number().integer().positive().required(),
+    photo: Joi.string().required(),
+    type: Joi.string().required(),
+    bed: Joi.string().required(),
+    amenities: Joi.string().required(),
+    descripcion: Joi.string().required(),
+    rate: Joi.number().required(),
+    price: Joi.number().required(),
+    discount: Joi.number().required(),
+    available: Joi.boolean()
+})

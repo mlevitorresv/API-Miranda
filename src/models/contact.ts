@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import Joi from "joi"
 
 export interface ContactInterface {
     photo: string
@@ -11,16 +11,14 @@ export interface ContactInterface {
     archived: boolean
 }
 
-
-const contactSchema = new Schema({
-    photo: {type: String, required: true},
-    name: {type: String, required: true},
-    email: {type: String, required: true},
-    phone: {type: String, required: true},
-    comment: {type: String, required: true},
-    date: {type: String, required: true},
-    dateTime: {type: String, required: true},
-    archived: {type: Boolean, required: true}
+export const contactSchema = Joi.object({
+    id: Joi.number().integer().positive().required(),
+    photo: Joi.string().required(),
+    name: Joi.string().required(),
+    email: Joi.string().required(),
+    phone: Joi.string().required(),
+    comment: Joi.string().required(),
+    date: Joi.string().required(),
+    dateTime: Joi.string().required(),
+    archived: Joi.boolean(),
 })
-
-export const ContactModel = model<ContactInterface>('Contact', contactSchema); 

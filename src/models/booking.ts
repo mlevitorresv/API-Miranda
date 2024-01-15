@@ -1,3 +1,4 @@
+import Joi from "joi"
 import { Schema, model } from "mongoose"
 
 export interface BookingInterface {
@@ -14,18 +15,19 @@ export interface BookingInterface {
     status: string
 }
 
-const bookingSchema = new Schema({
-    photo: {type: String, required: true},
-    name: {type: String, required: true},
-    orderDate: {type: String, required: true},
-    orderTime: {type: String, required: true},
-    checkInDate: {type: String, required: true},
-    checkInTime: {type: String, required: true},
-    checkOut: {type: String, required: true},
-    checkOutTime: {type: String, required: true},
-    notes: {type: String, required: true},
-    room: {type: String, required: true},
-    status: {type: String, required: true}
+
+const bookingSchema = Joi.object({
+    id: Joi.number().integer().positive().required(),
+    photo: Joi.string().required(),
+    name: Joi.string().required(),
+    orderDate: Joi.string().required(),
+    orderTime: Joi.string().required(),
+    checkInDate: Joi.string().required(),
+    checkInTime: Joi.string().required(),
+    checkOut: Joi.string().required(),
+    checkOutTime: Joi.string().required(),
+    notes: Joi.string().required(),
+    room: Joi.string().required(),
+    status: Joi.string().required()
 })
 
-export const BookingModel = model<BookingInterface>('Booking', bookingSchema);

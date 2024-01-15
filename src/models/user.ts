@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import Joi from 'joi'
 
 export interface UserInterface {
     photo: string,
@@ -10,18 +10,13 @@ export interface UserInterface {
     status: string
 }
 
-const userSchema = new Schema({
-    photo: {type: String, required: true},
-    name: {type: String, required: true},
-    date: {type: String, required: true},
-    email: {type: String, required: true},
-    phone: {type: String, required: true},
-    description: {type: String, required: true},
-    status: {type: String, required: true}
+export const userSchema = Joi.object({
+    id: Joi.number().integer().positive().required(),
+    photo: Joi.string().required(),
+    name: Joi.string().required(),
+    date: Joi.string().required(),
+    email: Joi.string().required(),
+    phone: Joi.string().required(),
+    description: Joi.string().required(),
+    status: Joi.string().required(),
 })
-
-// const userSchema = `
-
-// `
-
-export const UserModel = model<UserInterface>('User', userSchema);
