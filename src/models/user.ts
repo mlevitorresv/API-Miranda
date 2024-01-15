@@ -20,4 +20,8 @@ const userSchema = new Schema({
     status: {type: String, required: true}
 })
 
+// const userSchema = `
+
+// `
+
 export const UserModel = model<UserInterface>('User', userSchema);
