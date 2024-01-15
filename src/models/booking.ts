@@ -16,7 +16,7 @@ export interface BookingInterface {
 }
 
 
-const bookingSchema = Joi.object({
+export const bookingSchema = Joi.object({
     id: Joi.number().integer().positive().required(),
     photo: Joi.string().required(),
     name: Joi.string().required(),
