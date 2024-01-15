@@ -7,7 +7,7 @@ import { bookingRouter } from './controllers/booking'
 import { authMiddleware } from './middleware/auth'
 import { publicRouter } from './public/public'
 import { loginRouter } from './controllers/login'
-import { mongoConnect } from './config/mongo'
+import { mongoConnect } from './config/db'
 
 
 export const app = express()

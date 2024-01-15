@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { RoomModel } from '../models/room'
-import { mongoConnect } from '../config/mongo'
+import { mongoConnect } from '../config/db'
 import { UserModel } from '../models/user';
 import { ContactModel } from '../models/contact';
 import { BookingModel } from '../models/booking';
