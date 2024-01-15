@@ -7,7 +7,7 @@ import { bookingRouter } from './controllers/booking'
 import { authMiddleware } from './middleware/auth'
 import { publicRouter } from './public/public'
 import { loginRouter } from './controllers/login'
-import { mongoConnect } from './config/db'
+import { mysqlConnect } from './config/db'
 
 
 export const app = express()
@@ -21,7 +21,7 @@ const corsOptions = {
 
 
 app.use(cors(corsOptions))
-mongoConnect();
+mysqlConnect();
 app.use(express.json())
 
 app.use('/login', loginRouter)

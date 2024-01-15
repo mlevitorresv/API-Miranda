@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { RoomModel } from '../models/room'
-import { mongoConnect } from '../config/db'
+import { mysqlConnect } from '../config/db'
 import { UserModel } from '../models/user';
 import { ContactModel } from '../models/contact';
 import { BookingModel } from '../models/booking';
@@ -79,7 +79,7 @@ const createRandomBooking = async () => {
 
 
 const run = async () => {
-    mongoConnect();
+    mysqlConnect();
     for (let i = 0; i < 10; i++) {
         await createRandomRoom();
         await createRandomUser();
