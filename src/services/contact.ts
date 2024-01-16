@@ -1,22 +1,26 @@
-// import { ContactInterface, ContactModel } from '../models/contact';
+import { mysqlConnect } from "../config/db";
 
-// export const fetchAllContacts = async (): Promise<ContactInterface[]> => {
-//     try{
-//         return await ContactModel.find();
-//     }catch(error){
-//         console.error('Error, contacts were not obtained: ', error)
-//         throw error;
-//     }
-// }
+export const fetchAllContacts = async (): Promise<any> => {
+    try{
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`SELECT * FROM contacts`)
+        return result;
+    }catch(error){
+        console.error('Error, contacts were not obtained: ', error)
+        throw error;
+    }
+}
 
-// export const fetchContactById = async (id: string): Promise<ContactInterface | null> => {
-//     try{
-//         return await ContactModel.findById(id);
-//     }catch(error){
-//         console.error('Error, contact were not obtained: ', error)
-//         throw error;
-//     }
-// }
+export const fetchContactById = async (id: string): Promise<any> => {
+    try{
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`SELECT * FROM contacts WHERE id = ${id}`)
+        return result;
+    }catch(error){
+        console.error('Error, contact were not obtained: ', error)
+        throw error;
+    }
+}
 
 // export const postContact = async (contact: ContactInterface) => {
 //     try{
@@ -48,12 +52,13 @@
 //     }
 // }
 
-// export const deleteContact = async(id: string) => {
-//     try {
-//         await ContactModel.findByIdAndDelete(id)
-//         return { success: true }
-//     } catch (error) {
-//         console.error('Error, booking not deleted: ', error)
-//         throw error;
-//     }
-// }
+export const deleteContact = async(id: string) => {
+    try {
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`DELETE FROM contacts WHERE id = ${id}`)
+        return result;        
+    } catch (error) {
+        console.error('Error, booking not deleted: ', error)
+        throw error;
+    }
+}

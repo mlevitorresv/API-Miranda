@@ -1,13 +1,12 @@
 import express, { Request, Response } from 'express'
-// import { deleteContact, fetchAllContacts, fetchContactById, postContact, putContact } from '../services/contact';
-import { ContactInterface } from '../models/contact';
+import { deleteContact, fetchAllContacts, fetchContactById } from '../services/contact';
 
 export const contactRouter = express.Router();
 
 contactRouter.get('/', async (req: Request, res: Response) => {
     try {
-        // const allContacts: ContactInterface[] = await fetchAllContacts();
-        // res.json({ contacts: allContacts })
+        const allContacts = await fetchAllContacts();
+        res.json({ contacts: allContacts })
     } catch (error) {
         console.error('Error getting the contacts: ', error)
         res.status(500).json({ error: 'Internal server error' })
@@ -16,9 +15,9 @@ contactRouter.get('/', async (req: Request, res: Response) => {
 
 contactRouter.get('/:id', async (req: Request, res: Response) => {
     try {
-        // const id: string = req.params.id;
-        // const contact: ContactInterface | null = await fetchContactById(id)
-        // res.json({ contact: contact })
+        const id: string = req.params.id;
+        const contact = await fetchContactById (id)
+        res.json({ contact: contact })
     } catch (error) {
         console.error('Error getting the contact: ', error)
         res.status(500).json({ error: 'Internal server error' })
@@ -48,9 +47,9 @@ contactRouter.put('/:id', async (req: Request, res: Response) => {
 
 contactRouter.delete('/:id', async (req: Request, res: Response) => {
     try {
-        // const id: string = req.params.id;
-        // const result = await deleteContact(id);
-        // res.json(result)
+        const id: string = req.params.id;
+        const result = await deleteContact(id);
+        res.json(result)
     } catch (error) {
         console.error('Error deleting the contact: ', error)
         res.status(500).json({ error: 'Internal server error' })
