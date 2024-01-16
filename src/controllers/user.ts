@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 // import { deleteUser, fetchAllUsers, fetchUserById, postUser, putUser } from '../services/user';
 import { UserInterface } from '../models/user';
-import { deleteUser, fetchAllUsers, fetchUserById } from '../services/user';
+import { deleteUser, fetchAllUsers, fetchUserById, postUser } from '../services/user';
 
 
 export const userRouter = express.Router();
@@ -29,8 +29,8 @@ userRouter.get('/:id', async(req: Request, res: Response) => {
 
 userRouter.post('/', async (req: Request, res: Response) => {
     try {
-        // const result = await postUser(req.body);
-        // res.json(result)
+        const result = await postUser(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error saving the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })

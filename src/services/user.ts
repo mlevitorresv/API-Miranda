@@ -24,24 +24,21 @@ export const fetchUserById = async (id: string): Promise<any> => {
     }
 }
 
-// export const postUser = async (user: UserInterface) => {
-//     try{
-//         const data = new UserModel({
-//             photo: user.photo,
-//             name: user.name,
-//             date: user.date,
-//             email: user.email,
-//             phone: user.phone,
-//             description: user.description,
-//             status: user.status
-//         })
-//         await data.save();
-//         return { success: true, user: data }
-//     }catch (error) {
-//         console.error('Error, user not saved: ', error)
-//         throw error;
-//     }
-// }
+export const postUser = async (user: UserInterface) => {
+    try{
+        const date = new Date(user.date).toISOString().split('T')[0];
+        const query = `
+            INSERT INTO users (photo, name, date, email, phone, description, status) 
+            VALUES ('${user.photo}', '${user.name}', '${date}', '${user.email}', '${user.phone}', '${user.description}', '${user.status}')
+        `
+        const connection = await mysqlConnect();
+        connection.execute(query)
+        return { success: true, user: user }
+    }catch (error) {
+        console.error('Error, user not saved: ', error)
+        throw error;
+    }
+}
 
 // export const putUser = async (id: string, body: UserInterface) => {
 //     try {
