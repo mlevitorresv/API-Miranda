@@ -51,12 +51,13 @@ export const fetchUserById = async (id: string): Promise<any> => {
 //         throw error;
 //     }}
 
-// export const deleteUser = async(id: string) => {
-//     try {
-//         await UserModel.findByIdAndDelete(id)
-//         return { success: true }
-//     } catch (error) {
-//         console.error('Error, booking not deleted: ', error)
-//         throw error;
-//     }
-// }
+export const deleteUser = async(id: string) => {
+    try {
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`DELETE FROM users WHERE id = ${id}`)
+        return result;
+    } catch (error) {
+        console.error('Error, booking not deleted: ', error)
+        throw error;
+    }
+}
