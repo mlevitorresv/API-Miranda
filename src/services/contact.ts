@@ -1,4 +1,6 @@
+import { time } from "console";
 import { mysqlConnect } from "../config/db";
+import { ContactInterface } from "../models/contact";
 
 export const fetchAllContacts = async (): Promise<any> => {
     try{
@@ -22,26 +24,28 @@ export const fetchContactById = async (id: string): Promise<any> => {
     }
 }
 
-// export const postContact = async (contact: ContactInterface) => {
-//     try{
-//         const data = new ContactModel({
-//             photo: contact.photo,
-//             name: contact.name,
-//             email: contact.email,
-//             phone: contact.phone,
-//             comment: contact.comment,
-//             date: contact.date,
-//             dateTime: contact.dateTime,
-//             archived: contact.archived
-//         })
-//         await data.save();
-//         return { success: true, contact: data }
-//     }catch(error){
-//         console.error('Error, contact not saved: ', error)
-//         throw error;
-//     }
+export const postContact = async (contact: ContactInterface) => {
+    try{
+        const date = new Date(contact.date).toISOString().split('T')[0];
+        const[hours, minutes] = contact.dateTime.split(':');
+        const referenceDate = new Date(2000, 0, 1, parseInt(hours), parseInt(minutes));
+        const time = referenceDate.toISOString().slice(11,16)
+
+        const query = `
+            INSERT INTO contacts (photo, name, email, phone, comment, date, dateTime, archived) 
+            VALUES ('${contact.photo}', '${contact.name}', '${contact.email}', '${contact.phone}',
+             '${contact.comment}', '${date}', '${time}', ${contact.archived})
+        `
+
+        const connection = await mysqlConnect();
+        connection.execute(query)
+        return { success: true, contact: contact }
+    }catch(error){
+        console.error('Error, contact not saved: ', error)
+        throw error;
+    }
     
-// }
+}
 
 // export const putContact = async (id: string, body: ContactInterface) => {
 //     try {

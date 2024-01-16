@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { deleteContact, fetchAllContacts, fetchContactById } from '../services/contact';
+import { deleteContact, fetchAllContacts, fetchContactById, postContact } from '../services/contact';
 
 export const contactRouter = express.Router();
 
@@ -26,8 +26,8 @@ contactRouter.get('/:id', async (req: Request, res: Response) => {
 
 contactRouter.post('/', async (req: Request, res: Response) => {
     try {
-        // const result = await postContact(req.body);
-        // res.json(result)
+        const result = await postContact(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error saving the contact: ', error)
         res.status(500).json({ error: 'Internal server error' })
