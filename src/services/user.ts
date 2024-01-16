@@ -1,23 +1,28 @@
-// import { UserInterface, UserModel } from '../models/user';
+import { mysqlConnect } from '../config/db';
+import { UserInterface } from '../models/user';
 
 
-// export const fetchAllUsers = async (): Promise<UserInterface[]> => {
-//     try{
-//         return await UserModel.find();
-//     }catch(error){
-//         console.error('Error, users were not obtained: ', error)
-//         throw error;
-//     }
-// }
+export const fetchAllUsers = async (): Promise<any>  => {
+    try{
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute('SELECT * FROM users')
+        return result;
+    }catch(error){
+        console.error('Error, users were not obtained: ', error)
+        throw error;
+    }
+}
 
-// export const fetchUserById = async (id: string): Promise<UserInterface | null> => {
-//     try{
-//         return await UserModel.findById(id);
-//     }catch(error){
-//         console.error('Error, user were not obtained: ', error)
-//         throw error;
-//     }
-// }
+export const fetchUserById = async (id: string): Promise<any> => {
+    try{
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`SELECT * FROM users WHERE id = ${id}`)
+        return result;
+    }catch(error){
+        console.error('Error, user were not obtained: ', error)
+        throw error;
+    }
+}
 
 // export const postUser = async (user: UserInterface) => {
 //     try{
