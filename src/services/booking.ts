@@ -41,13 +41,25 @@ export const postBooking = async(booking: BookingInterface) => {
     
 }
 
-// export const putBooking = async (id: string, body: BookingInterface) => {
-//     try {
-//         return await BookingModel.findByIdAndUpdate(id, body)
-//     } catch (error) {
-//         console.error('Error, booking not updated: ', error)
-//         throw error;
-//     }}
+export const putBooking = async (id: string, body: BookingInterface) => {
+    try {
+        const updateFields = {...body};
+        const keys = Object.keys(updateFields)
+        const values = Object.values(updateFields)
+        
+        const setClause = keys.map(key => `${key} = ?`).join(', ')
+
+        const query = `UPDATE bookings SET ${setClause} WHERE id = ?;`;
+
+        const connection = await mysqlConnect();
+        const updateValues = [...values, id];
+
+        connection.execute(query, updateValues)
+        return { success: true, user: body }
+    } catch (error) {
+        console.error('Error, booking not updated: ', error)
+        throw error;
+    }}
 
 export const deleteBooking = async (id: string) => {
     try {
