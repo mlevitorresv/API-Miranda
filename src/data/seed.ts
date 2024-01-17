@@ -129,7 +129,7 @@ const createTableRooms = async (connection: Connection) => {
                 type VARCHAR(255) NOT NULL,
                 bed VARCHAR(255) NOT NULL,
                 amenities JSON,
-                description VARCHAR(9) NOT NULL,
+                description VARCHAR(255) NOT NULL,
                 rate INT NOT NULL,
                 price INT NOT NULL,
                 discount INT NOT NULL,

@@ -1,22 +1,27 @@
-// import { RoomInterface, RoomModel } from '../models/room';
+import { RowDataPacket } from 'mysql2';
+import { mysqlConnect } from '../config/db';
+import { RoomInterface } from '../models/room';
 
-// export const fetchAllRooms = async (): Promise<RoomInterface[]> => {
-//     try{
-//         return await RoomModel.find();
-//     }catch(error){
-//         console.error('Error, rooms were not obtained: ', error)
-//         throw error;
-//     }
-// }
+export const fetchAllRooms = async (): Promise<any> => {
+    try{
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute('SELECT * FROM rooms')
+        return result;
+    }catch(error){
+        console.error('Error, rooms were not obtained: ', error)
+        throw error;
+    }
+}
 
-// export const fetchRoomById = async (id: string): Promise<RoomInterface | null> => {
-//     try{
-//         return await RoomModel.findById(id);
-//     }catch(error){
-//         console.error('Error, room were not obtained: ', error)
-//         throw error;
-//     }
-// }
+export const fetchRoomById = async (id: string): Promise<any> => {
+    try{
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`SELECT * FROM rooms WHERE id = ${id}`)
+        return result;    }catch(error){
+        console.error('Error, room were not obtained: ', error)
+        throw error;
+    }
+}
 
 // export const postRoom = async (room: RoomInterface) => {
 //     try {

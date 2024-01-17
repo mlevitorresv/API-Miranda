@@ -1,13 +1,14 @@
 import express, { Request, Response } from 'express'
 // import { deleteRoom, fetchAllRooms, fetchRoomById, postRoom, putRoom } from '../services/room';
 import { RoomInterface } from '../models/room';
+import { fetchAllRooms, fetchRoomById } from '../services/room';
 
 export const roomRouter = express.Router();
 
 roomRouter.get('/', async (req: Request, res: Response) => {
     try {
-        // const allRooms: RoomInterface[] = await fetchAllRooms();
-        // res.json({ rooms: allRooms })
+        const allRooms: RoomInterface[] = await fetchAllRooms();
+        res.json({ rooms: allRooms })
     } catch (error) {
         console.error('Error getting the rooms: ', error)
         res.status(500).json({ error: 'Internal server error' })
@@ -16,9 +17,9 @@ roomRouter.get('/', async (req: Request, res: Response) => {
 
 roomRouter.get('/:id', async (req: Request, res: Response) => {
     try {
-        // const id: string = req.params.id;
-        // const room: RoomInterface | null = await fetchRoomById(id);
-        // res.json({ room: room })
+        const id: string = req.params.id;
+        const room: RoomInterface | null = await fetchRoomById(id);
+        res.json({ room: room })
     } catch (error) {
         console.error('Error getting the rooom: ', error)
         res.status(500).json({ error: 'Internal server error' })
