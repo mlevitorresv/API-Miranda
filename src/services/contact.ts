@@ -49,7 +49,19 @@ export const postContact = async (contact: ContactInterface) => {
 
 export const putContact = async (id: string, body: ContactInterface) => {
     try {
-        // return await ContactModel.findByIdAndUpdate(id, body)
+        const updateFields = {...body};
+        const keys = Object.keys(updateFields)
+        const values = Object.values(updateFields)
+        
+        const setClause = keys.map(key => `${key} = ?`).join(', ')
+
+        const query = `UPDATE contacts SET ${setClause} WHERE id = ?;`;
+
+        const connection = await mysqlConnect();
+        const updateValues = [...values, id];
+
+        connection.execute(query, updateValues)
+        return { success: true, user: body }
     } catch (error) {
         console.error('Error, contact not updated: ', error)
         throw error;

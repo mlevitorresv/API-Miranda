@@ -34,16 +34,16 @@ contactRouter.post('/', async (req: Request, res: Response) => {
     }
 })
 
-// contactRouter.put('/:id', async (req: Request, res: Response) => {
-//     try {
-//         const id = req.params.id;
-//         const result = await putContact(id, req.body);
-//         res.json(result)
-//     } catch (error) {
-//         console.error('Error updating the contact: ', error)
-//         res.status(500).json({ error: 'Internal server error' })
-//     }
-// })
+contactRouter.put('/:id', async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const result = await putContact(id, req.body);
+        res.json(result)
+    } catch (error) {
+        console.error('Error updating the contact: ', error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
+})
 
 contactRouter.delete('/:id', async (req: Request, res: Response) => {
     try {
