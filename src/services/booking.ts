@@ -24,29 +24,22 @@ export const fetchBookingById = async (id: string): Promise<any> => {
     }
 }
 
-// export const postBooking = async(booking: BookingInterface) => {
-//     try {
-//         const data = new BookingModel({
-//             photo: booking.photo,
-//             name: booking.name,
-//             orderDate: booking.orderDate,
-//             orderTime: booking.orderTime,
-//             checkInDate: booking.checkInDate,
-//             checkInTime: booking.checkInTime,
-//             checkOut: booking.checkOut,
-//             checkOutTime: booking.checkOutTime,
-//             notes: booking.notes,
-//             room: booking.room,
-//             status: booking.status
-//         })
-//         await data.save();
-//         return { success: true, booking: data }
-//     } catch (error) {
-//         console.error('Error, booking not saved: ', error)
-//         throw error;
-//     }
+export const postBooking = async(booking: BookingInterface) => {
+    try {
+        const query = `
+            INSERT INTO bookings (photo, name, orderDate, orderTime, checkinDate, checkinTime, checkout, checkoutTime, notes, roomId, status)
+            VALUES ('${booking.photo}', '${booking.name}', '${booking.orderDate}', '${booking.orderTime}', '${booking.checkInDate}', '${booking.checkInTime}', '${booking.checkOut}', '${booking.checkOutTime}', '${booking.notes}', ${booking.room}, '${booking.status}')
+        `
+
+        const connection = await mysqlConnect();
+        connection.execute(query)
+        return { success: true, contact: booking }
+    } catch (error) {
+        console.error('Error, booking not saved: ', error)
+        throw error;
+    }
     
-// }
+}
 
 // export const putBooking = async (id: string, body: BookingInterface) => {
 //     try {
