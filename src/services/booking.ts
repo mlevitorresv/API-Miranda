@@ -56,12 +56,14 @@ export const fetchBookingById = async (id: string): Promise<any> => {
 //         throw error;
 //     }}
 
-// export const deleteBooking = async (id: string) => {
-//     try {
-//         await BookingModel.findByIdAndDelete(id)
-//         return { success: true }
-//     } catch (error) {
-//         console.error('Error, booking not deleted: ', error)
-//         throw error;
-//     }
-// }
+export const deleteBooking = async (id: string) => {
+    try {
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`DELETE FROM bookings WHERE id = ${id}`)
+        return result;
+        return { success: true }
+    } catch (error) {
+        console.error('Error, booking not deleted: ', error)
+        throw error;
+    }
+}

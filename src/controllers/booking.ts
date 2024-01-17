@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 // import { deleteBooking, fetchAllBookings, fetchBookingById, postBooking, putBooking } from '../services/booking';
 import { BookingInterface } from '../models/booking';
-import { fetchAllBookings, fetchBookingById } from '../services/booking';
+import { deleteBooking, fetchAllBookings, fetchBookingById } from '../services/booking';
 
 export const bookingRouter = express.Router();
 
@@ -49,9 +49,9 @@ bookingRouter.put('/:id', async (req: Request, res: Response) => {
 
 bookingRouter.delete('/:id', async (req: Request, res: Response) => {
     try {
-        // const id: string = req.params.id;
-        // const result = await deleteBooking(id);
-        // res.json(result)
+        const id: string = req.params.id;
+        const result = await deleteBooking(id);
+        res.json(result)
     } catch (error) {
         console.error('Error deleting the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })
