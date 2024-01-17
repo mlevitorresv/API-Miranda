@@ -47,14 +47,14 @@ export const postContact = async (contact: ContactInterface) => {
     
 }
 
-// export const putContact = async (id: string, body: ContactInterface) => {
-//     try {
-//         return await ContactModel.findByIdAndUpdate(id, body)
-//     } catch (error) {
-//         console.error('Error, contact not updated: ', error)
-//         throw error;
-//     }
-// }
+export const putContact = async (id: string, body: ContactInterface) => {
+    try {
+        // return await ContactModel.findByIdAndUpdate(id, body)
+    } catch (error) {
+        console.error('Error, contact not updated: ', error)
+        throw error;
+    }
+}
 
 export const deleteContact = async(id: string) => {
     try {
