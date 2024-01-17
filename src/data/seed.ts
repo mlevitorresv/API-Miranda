@@ -142,6 +142,31 @@ const createTableRooms = async (connection: Connection) => {
     }
 }
 
+const createTableBookings = async (connection: Connection) => {
+    try {
+        await connection.execute (`
+            CREATE TABLE IF NOT EXISTS bookings(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                photo VARCHAR(255) NOT NULL,
+                name VARCHAR(255) NOT NULL,
+                orderDate DATE NOT NULL,
+                orderTime TIME NOT NULL,
+                checkinDate DATE NOT NULL,
+                checkinTime TIME NOT NULL,
+                checkout DATE NOT NULL,
+                checkoutTime TIME NOT NULL,
+                notes TEXT NOT NULL,
+                roomId INT NOT NULL,
+                status VARCHAR(255) NOT NULL,
+                FOREIGN KEY (roomId) REFERENCES rooms(id)
+            )
+        `)
+        console.log(`Tabla 'bookings' creada correctamente`)
+    } catch (error) {
+        console.error(`Error al crear la tabla 'bookings': `, error);        
+    }
+}
+
 const run = async () => {
     const connection = await mysqlConnect();
 
@@ -149,6 +174,7 @@ const run = async () => {
         await createTableUsers(connection);
         await createTableContacts(connection);
         await createTableRooms(connection);
+        await createTableBookings(connection)
     } catch (error) {
         console.error('Error durante la creación de tablas:', error);
     } finally {

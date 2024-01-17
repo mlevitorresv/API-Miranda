@@ -16,18 +16,18 @@ export interface BookingInterface {
 }
 
 
-export const bookingSchema = Joi.object({
-    id: Joi.number().integer().positive().required(),
-    photo: Joi.string().required(),
-    name: Joi.string().required(),
-    orderDate: Joi.string().required(),
-    orderTime: Joi.string().required(),
-    checkInDate: Joi.string().required(),
-    checkInTime: Joi.string().required(),
-    checkOut: Joi.string().required(),
-    checkOutTime: Joi.string().required(),
-    notes: Joi.string().required(),
-    room: Joi.string().required(),
-    status: Joi.string().required()
-})
+// export const bookingSchema = Joi.object({
+//     id: Joi.number().integer().positive().required(),
+//     photo: Joi.string().required(),
+//     name: Joi.string().required(),
+//     orderDate: Joi.string().required(),
+//     orderTime: Joi.string().required(),
+//     checkInDate: Joi.string().required(),
+//     checkInTime: Joi.string().required(),
+//     checkOut: Joi.string().required(),
+//     checkOutTime: Joi.string().required(),
+//     notes: Joi.string().required(),
+//     room: Joi.string().required(),
+//     status: Joi.string().required()
+// })
 
