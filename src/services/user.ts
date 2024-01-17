@@ -40,13 +40,25 @@ export const postUser = async (user: UserInterface) => {
     }
 }
 
-// export const putUser = async (id: string, body: UserInterface) => {
-//     try {
-//         return await UserModel.findByIdAndUpdate(id, body)
-//     } catch (error) {
-//         console.error('Error, user not updated: ', error)
-//         throw error;
-//     }}
+export const putUser = async (id: string, body: UserInterface) => {
+    try {
+        const updateFields = {...body};
+        const keys = Object.keys(updateFields)
+        const values = Object.values(updateFields)
+        
+        const setClause = keys.map(key => `${key} = ?`).join(', ')
+
+        const query = `UPDATE users SET ${setClause} WHERE id = ?;`;
+
+        const connection = await mysqlConnect();
+        const updateValues = [...values, id];
+
+        connection.execute(query, updateValues)
+        return { success: true, user: body }
+    } catch (error) {
+        console.error('Error, user not updated: ', error)
+        throw error;
+    }}
 
 export const deleteUser = async(id: string) => {
     try {

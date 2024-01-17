@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 // import { deleteUser, fetchAllUsers, fetchUserById, postUser, putUser } from '../services/user';
 import { UserInterface } from '../models/user';
-import { deleteUser, fetchAllUsers, fetchUserById, postUser } from '../services/user';
+import { deleteUser, fetchAllUsers, fetchUserById, postUser, putUser } from '../services/user';
 
 
 export const userRouter = express.Router();
@@ -39,9 +39,9 @@ userRouter.post('/', async (req: Request, res: Response) => {
 
 userRouter.put('/:id', async (req: Request, res: Response) => {
     try {
-        // const id = req.params.id;
-        // const result = await putUser(id, req.body)
-        // res.json(result)
+        const id = req.params.id;
+        const result = await putUser(id, req.body)
+        res.json(result)
     } catch (error) {
         console.error('Error updating the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })
