@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 // import { deleteRoom, fetchAllRooms, fetchRoomById, postRoom, putRoom } from '../services/room';
 import { RoomInterface } from '../models/room';
-import { fetchAllRooms, fetchRoomById } from '../services/room';
+import { deleteRoom, fetchAllRooms, fetchRoomById, postRoom } from '../services/room';
 
 export const roomRouter = express.Router();
 
@@ -28,8 +28,8 @@ roomRouter.get('/:id', async (req: Request, res: Response) => {
 
 roomRouter.post('/', async (req: Request, res: Response) => {
     try {
-        // const result = await postRoom(req.body);
-        // res.json(result)
+        const result = await postRoom(req.body);
+        res.json(result)
     } catch (error) {
         console.error('Error saving the room: ', error)
         res.status(500).json({ error: 'Internal server error' })
@@ -50,9 +50,9 @@ roomRouter.put('/:id', async (req: Request, res: Response) => {
 
 roomRouter.delete('/:id', async (req: Request, res: Response) => {
     try {
-        // const id: string = req.params.id;
-        // const result = await deleteRoom(id)
-        // res.json(result)
+        const id: string = req.params.id;
+        const result = await deleteRoom(id)
+        res.json(result)
     } catch (error) {
         console.error('Error deleting the room: ', error)
         res.status(500).json({ error: 'Internal server error' })

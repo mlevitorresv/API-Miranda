@@ -1,4 +1,4 @@
-import { RowDataPacket } from 'mysql2';
+import mysql from 'mysql2';
 import { mysqlConnect } from '../config/db';
 import { RoomInterface } from '../models/room';
 
@@ -17,32 +17,31 @@ export const fetchRoomById = async (id: string): Promise<any> => {
     try{
         const connection = await mysqlConnect();
         const [result, fields] = await connection.execute(`SELECT * FROM rooms WHERE id = ${id}`)
-        return result;    }catch(error){
+        return result;    
+    }catch(error){
         console.error('Error, room were not obtained: ', error)
         throw error;
     }
 }
 
-// export const postRoom = async (room: RoomInterface) => {
-//     try {
-//         const data = new RoomModel({
-//             photo: room.photo,
-//             type: room.type,
-//             bed: room.bed,
-//             amenities: room.amenities,
-//             description: room.description,
-//             rate: room.rate,
-//             price: room.price,
-//             discount: room.discount,
-//             available: room.available
-//         })
-//         await data.save();
-//         return { success: true, room: data }
-//     }catch(error){
-//         console.error('Error, room not saved: ', error)
-//         throw error;
-//     }
-// }
+export const postRoom = async (room: RoomInterface) => {
+    try {
+
+        const amenities = JSON.stringify(room.amenities)
+        const amenitiesScaped = mysql.escape(amenities)
+        const query = `
+            INSERT INTO rooms (number, photo, type, bed, amenities, description, rate, price, discount, available)
+            VALUES (${room.number}, '${room.photo}', '${room.type}', '${room.bed}', ${amenitiesScaped}, '${room.description}', ${room.rate}, ${room.price}, ${room.discount}, ${room.available})
+        `
+
+        const connection = await mysqlConnect();
+        await connection.execute(query)
+        return { success: true, room: room }
+    }catch(error){
+        console.error('Error, room not saved: ', error)
+        throw error;
+    }
+}
 
 // export const putRoom = async (id: string, body: RoomInterface, ) => {
 //     try {
@@ -53,12 +52,14 @@ export const fetchRoomById = async (id: string): Promise<any> => {
 //     }
 // }
 
-// export const deleteRoom = async(id: string) => {
-//     try {
-//         await RoomModel.findByIdAndDelete(id)
-//         return { success: true }
-//     } catch (error) {
-//         console.error('Error, room not deleted: ', error)
-//         throw error;
-//     }
-// }
+export const deleteRoom = async(id: string) => {
+    try {
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`DELETE FROM rooms WHERE id = ${id}`)
+        return result;
+        return { success: true }
+    } catch (error) {
+        console.error('Error, room not deleted: ', error)
+        throw error;
+    }
+}
