@@ -1,13 +1,14 @@
 import express, { Request, Response } from 'express'
 // import { deleteBooking, fetchAllBookings, fetchBookingById, postBooking, putBooking } from '../services/booking';
 import { BookingInterface } from '../models/booking';
+import { fetchAllBookings, fetchBookingById } from '../services/booking';
 
 export const bookingRouter = express.Router();
 
 bookingRouter.get('/', async (req: Request, res: Response) => {
     try {
-        // const allBookings: BookingInterface[] = await fetchAllBookings();
-        // res.json({ bookings: allBookings })
+        const allBookings: BookingInterface[] = await fetchAllBookings();
+        res.json({ bookings: allBookings })
     } catch (error) {
         console.error('Error getting the bookings: ', error)
         res.status(500).json({ error: 'Internal server error' })
@@ -16,9 +17,9 @@ bookingRouter.get('/', async (req: Request, res: Response) => {
 
 bookingRouter.get('/:id', async (req: Request, res: Response) => {
     try {
-        // const id: string = req.params.id;
-        // const booking: BookingInterface | null = await fetchBookingById(id);
-        // res.json({ booking: booking })
+        const id: string = req.params.id;
+        const booking: BookingInterface | null = await fetchBookingById(id);
+        res.json({ booking: booking })
     } catch (error) {
         console.error('Error getting the booking: ', error)
         res.status(500).json({ error: 'Internal server error' })

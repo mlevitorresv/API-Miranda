@@ -1,23 +1,28 @@
-// import { BookingInterface } from '../models/booking';
+import { mysqlConnect } from '../config/db';
+import { BookingInterface } from '../models/booking';
 
 
-// export const fetchAllBookings = async (): Promise<BookingInterface[]> => {
-//     try{
-//         return await BookingModel.find();
-//     }catch(error){
-//         console.error('Error, bookings were not obtained: ', error)
-//         throw error;
-//     }
-// }
+export const fetchAllBookings = async (): Promise<any> => {
+    try{
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`SELECT * FROM bookings`)
+        return result;
+    }catch(error){
+        console.error('Error, bookings were not obtained: ', error)
+        throw error;
+    }
+}
 
-// export const fetchBookingById = async (id: string): Promise<BookingInterface | null> => {
-//     try{
-//         return await BookingModel.findById(id);
-//     }catch(error){
-//         console.error('Error, booking were not obtained: ', error)
-//         throw error;
-//     }
-// }
+export const fetchBookingById = async (id: string): Promise<any> => {
+    try{
+        const connection = await mysqlConnect();
+        const [result, fields] = await connection.execute(`SELECT * FROM bookings WHERE id = ${id}`)
+        return result;
+    }catch(error){
+        console.error('Error, booking were not obtained: ', error)
+        throw error;
+    }
+}
 
 // export const postBooking = async(booking: BookingInterface) => {
 //     try {
