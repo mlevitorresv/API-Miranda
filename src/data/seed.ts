@@ -1,79 +1,86 @@
-// import { RoomModel } from '../models/room'
+import { faker } from "@faker-js/faker";
 import { mysqlConnect } from '../config/db';
 import { Connection } from 'mysql2/promise';
-// import { UserModel } from '../models/user';
-// import { ContactModel } from '../models/contact';
-// import { BookingModel } from '../models/booking';
+import { fetchAllRooms, postRoom } from '../services/room';
+import { postUser } from "../services/user";
+import { postContact } from "../services/contact";
+import { postBooking } from "../services/booking";
 
 
 const createRandomRoom = async () => {
-    // const room = new RoomModel({
-    //     photo: faker.image.urlPicsumPhotos().toString(),
-    //     id: faker.number.int(),
-    //     type: faker.string.alpha(),
-    //     bed: faker.helpers.arrayElement(["Single Bed", "Double bed", "Suite"]),
-    //     amenities: faker.string.alpha(),
-    //     description: faker.string.alpha(),
-    //     rate: faker.number.float(),
-    //     price: faker.number.float(),
-    //     discount: faker.number.int(),
-    //     available: faker.datatype.boolean()
-    // })
-    // await room.save()
+    const room = {
+        number: faker.number.int({min: 0, max: 300}),
+        photo: faker.image.urlPicsumPhotos().toString(),
+        type: faker.helpers.arrayElement([
+            "Single Bed",
+            "Double Bed",
+            "Suite",
+        ]),
+        bed: faker.helpers.arrayElement(["Big", "Medium", "Small"]),
+        amenities: [faker.helpers.arrayElement([
+            "TV",
+            "Sea",
+            "Room service",
+        ])],
+        description: faker.string.alpha(),
+        rate: faker.number.float({min: 0, max: 5}),
+        price: faker.number.float({min: 0, max: 300}),
+        discount: faker.number.int({min: 0, max: 100}),
+        available: faker.datatype.boolean()
+    }
+    postRoom(room);
 }
 
 const createRandomUser = async () => {
-    // const user = new UserModel({
-    //     photo: faker.image.urlPicsumPhotos().toString(),
-    //     id: faker.number.int(),
-    //     name: faker.person.fullName().toString(),
-    //     date: faker.date.birthdate().toLocaleDateString(),
-    //     email: faker.internet.email().toString(),
-    //     phone: faker.phone.number().toString(),
-    //     description: faker.string.alpha(),
-    //     status: faker.helpers.arrayElement(["ACTIVE", "INACTIVE"])
-    // })
-    // await user.save();
+    const user = {
+        photo: faker.image.urlPicsumPhotos(),
+        name: faker.person.fullName(),
+        date: faker.date.birthdate().toISOString().split('T')[0],
+        email: faker.internet.email(),
+        phone: faker.number.int({min: 611111111, max: 699999999}).toString(),
+        description: faker.string.alpha(),
+        status: faker.helpers.arrayElement(["ACTIVE", "INACTIVE"])
+    }
+    user.name = user.name.replace("'", "''");
+
+    postUser(user);
 }
 
 const createRandomContact = async () => {
-    // const contact = new ContactModel({
-    //     photo: faker.image.urlPicsumPhotos().toString(),
-    //     id: faker.number.int(),
-    //     name: faker.person.fullName().toString(),
-    //     email: faker.internet.email().toString(),
-    //     phone: faker.phone.number().toString(),
-    //     comment: faker.lorem.paragraph(3).toString(),
-    //     date: faker.date.recent().toLocaleDateString(),
-    //     dateTime: faker.date.recent().toLocaleTimeString(),
-    //     archived: faker.datatype.boolean()
+    const contact = {
+        photo: faker.image.urlPicsumPhotos(),
+        name: faker.person.fullName(),
+        email: faker.internet.email(),
+        phone: faker.number.int({min: 611111111, max: 699999999}).toString(),
+        comment: faker.lorem.paragraph(3).toString(),
+        date: faker.date.recent().toISOString().split('T')[0],
+        dateTime: faker.date.recent().toISOString().slice(11, 16),
+        archived: faker.datatype.boolean()
 
-    // })
-    // await contact.save()
+    }
+    postContact(contact)
 }
 
 const createRandomBooking = async () => {
-    // const rooms = await RoomModel.find();
-    // const random = Math.floor(Math.random() * rooms.length)
+    const rooms = await fetchAllRooms();
+    const random = Math.floor(Math.random() * rooms.length)
 
-    // const roomId = rooms[random].id;
+    const roomId = rooms[random].id;
 
-    // const booking = new BookingModel({
-    //     photo: faker.image.urlPicsumPhotos().toString(),
-    //     name: faker.person.fullName().toString(),
-    //     id: faker.number.int(),
-    //     orderDate: faker.date.past().toLocaleDateString(),
-    //     orderTime: faker.date.past().toLocaleTimeString(),
-    //     checkInDate: faker.date.soon().toLocaleDateString(),
-    //     checkInTime: faker.date.soon().toLocaleTimeString(),
-    //     checkOut: faker.date.future().toLocaleDateString(),
-    //     checkOutTime: faker.date.future().toLocaleTimeString(),
-    //     notes: faker.lorem.paragraph(1).toString(),
-    //     room: roomId,
-    //     status: faker.helpers.arrayElement(["pending", "booked", "refund"])
-    // })
-    // console.log(booking)
-    // await booking.save();
+    const booking = {
+        photo: faker.image.urlPicsumPhotos(),
+        name: faker.person.fullName(),
+        orderDate: faker.date.past().toISOString().split('T')[0],
+        orderTime: faker.date.past().toISOString().slice(11, 16),
+        checkInDate: faker.date.soon().toISOString().split('T')[0],
+        checkInTime: faker.date.soon().toISOString().slice(11, 16),
+        checkOut: faker.date.future().toISOString().split('T')[0],
+        checkOutTime: faker.date.future().toISOString().slice(11, 16),
+        notes: faker.lorem.paragraph(1).toString(),
+        room: roomId,
+        status: faker.helpers.arrayElement(["pending", "booked", "refund"])
+    }
+    postBooking(booking)
 }
 
 
@@ -180,12 +187,14 @@ const run = async () => {
     } finally {
         connection.end();
     }
-    // for (let i = 0; i < 10; i++) {
-    //     await createRandomRoom();
-    //     await createRandomUser();
-    //     await createRandomContact();
-    //     await createRandomBooking();        
-    // }
+    for (let i = 0; i < 10; i++) {
+        await createRandomRoom();
+        await createRandomUser();
+        await createRandomContact();
+        await createRandomBooking();        
+    }
 };
 
 run();
+
+// SELECT * FROM bookings INNER JOIN rooms WHERE bookings.roomId = rooms.id
