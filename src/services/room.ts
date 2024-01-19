@@ -43,7 +43,7 @@ export const postRoom = async (room: RoomInterface) => {
     }
 }
 
-export const putRoom = async (id: string, body: RoomInterface, ) => {
+export const patchRoom = async (id: string, body: RoomInterface, ) => {
     try {
         const updateFields = {...body};
         const keys = Object.keys(updateFields)

@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 // import { deleteBooking, fetchAllBookings, fetchBookingById, postBooking, putBooking } from '../services/booking';
 import { BookingInterface } from '../models/booking';
-import { deleteBooking, fetchAllBookings, fetchBookingById, postBooking, putBooking } from '../services/booking';
+import { deleteBooking, fetchAllBookings, fetchBookingById, postBooking, patchBooking } from '../services/booking';
 
 export const bookingRouter = express.Router();
 
@@ -36,10 +36,10 @@ bookingRouter.post('/', async (req: Request, res: Response) => {
     }
 })
 
-bookingRouter.put('/:id', async (req: Request, res: Response) => {
+bookingRouter.patch('/:id', async (req: Request, res: Response) => {
     try {
         const id = req.params.id;
-        const result = await putBooking(id, req.body);
+        const result = await patchBooking(id, req.body);
         res.json(result)
     } catch (error) {
         console.error('Error updating the booking: ', error)

@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { deleteContact, fetchAllContacts, fetchContactById, postContact, putContact } from '../services/contact';
+import { deleteContact, fetchAllContacts, fetchContactById, postContact, patchContact } from '../services/contact';
 
 export const contactRouter = express.Router();
 
@@ -34,10 +34,10 @@ contactRouter.post('/', async (req: Request, res: Response) => {
     }
 })
 
-contactRouter.put('/:id', async (req: Request, res: Response) => {
+contactRouter.patch('/:id', async (req: Request, res: Response) => {
     try {
         const id = req.params.id;
-        const result = await putContact(id, req.body);
+        const result = await patchContact(id, req.body);
         res.json(result)
     } catch (error) {
         console.error('Error updating the contact: ', error)

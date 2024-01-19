@@ -47,7 +47,7 @@ export const postContact = async (contact: ContactInterface) => {
     
 }
 
-export const putContact = async (id: string, body: ContactInterface) => {
+export const patchContact = async (id: string, body: ContactInterface) => {
     try {
         const updateFields = {...body};
         const keys = Object.keys(updateFields)

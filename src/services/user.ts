@@ -40,7 +40,7 @@ export const postUser = async (user: UserInterface) => {
     }
 }
 
-export const putUser = async (id: string, body: UserInterface) => {
+export const patchUser = async (id: string, body: UserInterface) => {
     try {
         const updateFields = {...body};
         const keys = Object.keys(updateFields)

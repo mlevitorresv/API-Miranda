@@ -41,7 +41,7 @@ export const postBooking = async(booking: BookingInterface) => {
     
 }
 
-export const putBooking = async (id: string, body: BookingInterface) => {
+export const patchBooking = async (id: string, body: BookingInterface) => {
     try {
         const updateFields = {...body};
         const keys = Object.keys(updateFields)
