@@ -98,7 +98,6 @@ const createTableUsers = async (connection: Connection) => {
                 status VARCHAR(255) NOT NULL
             )
         `)
-        await connection.execute (`DELETE FROM users`)
         console.log(`Tabla 'users' creada correctamente`)
     } catch (error) {
         console.error(`Error al crear la tabla 'users': `, error);        
@@ -121,7 +120,6 @@ const createTableContacts = async (connection: Connection) => {
                 archived BOOLEAN NOT NULL
             )
         `)
-        await connection.execute (`DELETE FROM contacts`)
         console.log(`Tabla 'contacts' creada correctamente`)
     } catch (error) {
         console.error(`Error al crear la tabla 'contacts': `, error);        
@@ -145,7 +143,6 @@ const createTableRooms = async (connection: Connection) => {
                 available BOOLEAN NOT NULL
             )
         `)
-        await connection.execute (`DELETE FROM rooms`)
         console.log(`Tabla 'rooms' creada correctamente`)
     } catch (error) {
         console.error(`Error al crear la tabla 'rooms': `, error);        
@@ -171,7 +168,6 @@ const createTableBookings = async (connection: Connection) => {
                 FOREIGN KEY (roomId) REFERENCES rooms(id)
             )
         `)
-        await connection.execute (`DELETE FROM bookings`)
         console.log(`Tabla 'bookings' creada correctamente`)
     } catch (error) {
         console.error(`Error al crear la tabla 'bookings': `, error);        
