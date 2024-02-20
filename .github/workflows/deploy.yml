@@ -21,9 +21,7 @@ jobs:
         run: npm install
 
       - name: build project
-        env:
-          SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
-        run: npm run build
+        run: SECRET_KEY=${{ secrets.API_SECRET_KEY }} npm run build
         
       - name: deploy in lambda
         uses: serverless/github-action@v3.2
