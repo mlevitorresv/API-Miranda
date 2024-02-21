@@ -28,6 +28,9 @@ jobs:
           DB_COLLECTION: ${{ secrets.DB_COLLECTION }}
           DB_CLUSTER: ${{ secrets.DB_CLUSTER }}
           DB_NAME: ${{ secrets.DB_NAME }}
+          file_name: .env
+          fail_on_empty: false
+          sort_keys: false
 
       - name: install dependencies
         run: npm install
