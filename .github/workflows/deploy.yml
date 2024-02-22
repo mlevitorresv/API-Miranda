@@ -18,19 +18,15 @@ jobs:
           node-version: '18.15.0'
 
       - name: create envfile
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          USER_ADMIN: ${{ secrets.USER_ADMIN }}
-          PASSWORD_ADMIN: ${{ secrets.PASSWORD_ADMIN }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_COLLECTION: ${{ secrets.DB_COLLECTION }}
-          DB_CLUSTER: ${{ secrets.DB_CLUSTER }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          file_name: .env
-          fail_on_empty: false
-          sort_keys: false
+        run: |
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+          echo "USER_ADMIN=${{ secrets.USER_ADMIN }}" >> .env
+          echo "PASSWORD_ADMIN=${{ secrets.PASSWORD_ADMIN }}" >> .env
+          echo "DB_COLLECTION=${{ secrets.DB_COLLECTION }}" >> .env
+          echo "DB_CLUSTER=${{ secrets.DB_CLUSTER }}" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
 
       - name: install dependencies
         run: npm install
