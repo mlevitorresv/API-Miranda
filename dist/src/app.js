@@ -16,7 +16,7 @@ const login_1 = require("./controllers/login");
 const mongo_1 = require("./config/mongo");
 exports.app = (0, express_1.default)();
 const corsOptions = {
-    "origin": "http://localhost:5173",
+    "origin": "https://miranda-hotel-dashboard.vercel.app",
     "credentials": true,
     "methods": "GET,PUT,PATCH,POST,DELETE",
     "allowedHeaders": "Content-Type,Authorization",
