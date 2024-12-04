@@ -12,7 +12,7 @@ import { mongoConnect } from './config/mongo'
 
 export const app = express()
 const corsOptions = {
-    "origin": "*",
+    "origin": "https://miranda-hotel-dashboard.vercel.app",
     "credentials" : true,
     "methods": "GET,PUT,PATCH,POST,DELETE",
     "allowedHeaders": "Content-Type,Authorization",
